@@ -1,0 +1,51 @@
+version: "3.3"
+
+services:
+  web:
+    build:
+      context: .
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 100000
+        hard: 100000
+  db:
+    image: mysql:5.7.38
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: chess
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 100000
+        hard: 100000
+  proxy:
+    image: nginx:latest
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+      - ./.next/:/next/.next/
+    network_mode: "host"
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
+      
+  proxysql:
+    network_mode: "host"
+    volumes:
+      - "./proxysql.cnf:/etc/proxysql.cnf"
+    image: proxysql/proxysql
+
+volumes:
+  db: {}
