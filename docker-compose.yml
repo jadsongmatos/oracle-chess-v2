@@ -14,10 +14,11 @@ services:
         soft: 100000
         hard: 100000
   db:
-    image: mysql:5.7.38
+    image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: dbpassword
       MYSQL_DATABASE: chess
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - db:/var/lib/mysql
     ports:
