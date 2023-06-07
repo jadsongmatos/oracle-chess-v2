@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.0.4" use-changelog="false" last-position="0,168" last-zoom="0.65" max-obj-count="22"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="pg_database_owner"
+ inherit="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<database name="chess" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="user" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="860" y="720"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="character varying" length="16"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="create_time" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="update_time">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="user_pkey" type="pk-constr" table="public.&quot;user&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="location" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1100" y="120"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="latitude" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="longitude" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="city" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="state" not-null="true">
+		<type name="character" length="2"/>
+	</column>
+	<column name="nation" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="location_pkey" type="pk-constr" table="public.location">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_location_user1_idx" table="public.location"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<table name="friend" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="580" y="120"/>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="friend_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="friend_pkey" type="pk-constr" table="public.friend">
+		<columns names="user_id,friend_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_friends_user1_idx" table="public.friend"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<index name="fk_friends_user2_idx" table="public.friend"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="friend_id"/>
+		</idxelement>
+</index>
+
+<table name="achievement" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2400" y="60"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<constraint name="achievement_pkey" type="pk-constr" table="public.achievement">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="name_unique" type="uq-constr" table="public.achievement">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="description_unique" type="uq-constr" table="public.achievement">
+		<columns names="description" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="achievement_user" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1620" y="80"/>
+	<column name="achievement_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="achievement_user_pkey" type="pk-constr" table="public.achievement_user">
+		<columns names="achievement_id,user_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_achievement_has_user_user1_idx" table="public.achievement_user"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<index name="fk_achievement_has_user_achievement1_idx" table="public.achievement_user"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="achievement_id"/>
+		</idxelement>
+</index>
+
+<table name="tree" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="760"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="value" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="depth" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="gameover" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="checkmate" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="update_time" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="parent_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="tree_pkey" type="pk-constr" table="public.tree">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_table1_table11_idx" table="public.tree"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="parent_id"/>
+		</idxelement>
+</index>
+
+<index name="fk_table1_user1_idx" table="public.tree"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<table name="link" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="380" y="400"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="url" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="create_time" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="link_pkey" type="pk-constr" table="public.link">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_link_user1_idx" table="public.link"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<table name="click" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="120" y="100"/>
+	<column name="idclick" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="create_time" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="others" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="link_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="click_pkey" type="pk-constr" table="public.click">
+		<columns names="idclick" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_click_link1_idx" table="public.click"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="link_id"/>
+		</idxelement>
+</index>
+
+<table name="coin" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1720" y="780"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="currency_origin" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="state" not-null="true" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="coin_pkey" type="pk-constr" table="public.coin">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_coin_user1_idx" table="public.coin"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<table name="item" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2180" y="300"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="45"/>
+	</column>
+	<column name="cost" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="stock" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="item_pkey" type="pk-constr" table="public.item">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="buy" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1720" y="360"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="price_at_time" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="create_time" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="item_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="state" not-null="true" default-value="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="stock_at_time" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="buy_pkey" type="pk-constr" table="public.buy">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_buy_item1_idx" table="public.buy"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="item_id"/>
+		</idxelement>
+</index>
+
+<index name="fk_buy_user1_idx" table="public.buy"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<table name="buy_coin" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2220" y="560"/>
+	<column name="buy_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="coin_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="buy_coin_pkey" type="pk-constr" table="public.buy_coin">
+		<columns names="buy_id,coin_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_buy_has_coin_coin1_idx" table="public.buy_coin"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="coin_id"/>
+		</idxelement>
+</index>
+
+<index name="fk_buy_has_coin_buy1_idx" table="public.buy_coin"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="buy_id"/>
+		</idxelement>
+</index>
+
+<table name="session" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1360" y="1100"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="create_time" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="end_time_new_session_time">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="total_active_time" not-null="true" default-value="'00:00:00'">
+		<type name="interval" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="session_pkey" type="pk-constr" table="public.session">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_session_session1_idx" table="public.session"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="end_time_new_session_time"/>
+		</idxelement>
+</index>
+
+<index name="fk_session_user1_idx" table="public.session"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+</index>
+
+<table name="activity" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="660" y="1460"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="activity_pkey" type="pk-constr" table="public.activity">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="interaction" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="140" y="1240"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="create_time" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="activity_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="interaction_pkey" type="pk-constr" table="public.interaction">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_interaction_activity1_idx" table="public.interaction"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="activity_id"/>
+		</idxelement>
+</index>
+
+<table name="interaction_session" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="760" y="1220"/>
+	<column name="interaction_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="session_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="interaction_session_pkey" type="pk-constr" table="public.interaction_session">
+		<columns names="interaction_id,session_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="fk_interaction_has_session_session1_idx" table="public.interaction_session"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="session_id"/>
+		</idxelement>
+</index>
+
+<index name="fk_interaction_has_session_interaction1_idx" table="public.interaction_session"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="interaction_id"/>
+		</idxelement>
+</index>
+
+<constraint name="fk_location_user1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.location">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_friends_user1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.friend">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_friends_user2" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.friend">
+	<columns names="friend_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_achievement_has_user_achievement1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.achievement" table="public.achievement_user">
+	<columns names="achievement_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_achievement_has_user_user1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.achievement_user">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_table1_table11" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.tree" table="public.tree">
+	<columns names="parent_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_table1_user1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.tree">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_link_user1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.link">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_click_link1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.link" table="public.click">
+	<columns names="link_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_coin_user1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.coin">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_buy_item1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.item" table="public.buy">
+	<columns names="item_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_buy_user1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.buy">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_buy_has_coin_buy1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.buy" table="public.buy_coin">
+	<columns names="buy_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_buy_has_coin_coin1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.coin" table="public.buy_coin">
+	<columns names="coin_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_session_session1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.session" table="public.session">
+	<columns names="end_time_new_session_time" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_session_user1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;user&quot;" table="public.session">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_interaction_activity1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.activity" table="public.interaction">
+	<columns names="activity_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_interaction_has_session_interaction1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.interaction" table="public.interaction_session">
+	<columns names="interaction_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_interaction_has_session_session1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.session" table="public.interaction_session">
+	<columns names="session_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_location_user" type="relfk" layers="0"
+	 custom-color="#40af30"
+	 src-table="public.location"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_location_user1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_friend_user" type="relfk" layers="0"
+	 custom-color="#8e9b40"
+	 src-table="public.friend"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_friends_user1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_friend_user1" type="relfk" layers="0"
+	 custom-color="#7de337"
+	 src-table="public.friend"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_friends_user2"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_achievement_user_achievement" type="relfk" layers="0"
+	 custom-color="#d17092"
+	 src-table="public.achievement_user"
+	 dst-table="public.achievement" reference-fk="fk_achievement_has_user_achievement1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_achievement_user_user" type="relfk" layers="0"
+	 custom-color="#2467a4"
+	 src-table="public.achievement_user"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_achievement_has_user_user1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_tree_tree" type="relfk" layers="0"
+	 custom-color="#6da539"
+	 src-table="public.tree"
+	 dst-table="public.tree" reference-fk="fk_table1_table11"
+	 src-required="false" dst-required="true">
+	<line>
+		<position x="420.328" y="876.241"/>
+	<position x="420.328" y="738"/>
+	<position x="298.885" y="738"/>
+	</line>
+</relationship>
+
+<relationship name="rel_tree_user" type="relfk" layers="0"
+	 custom-color="#491aaa"
+	 src-table="public.tree"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_table1_user1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_link_user" type="relfk" layers="0"
+	 custom-color="#2d0c4a"
+	 src-table="public.link"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_link_user1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_click_link" type="relfk" layers="0"
+	 custom-color="#f8ab23"
+	 src-table="public.click"
+	 dst-table="public.link" reference-fk="fk_click_link1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_coin_user" type="relfk" layers="0"
+	 custom-color="#e30534"
+	 src-table="public.coin"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_coin_user1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_buy_item" type="relfk" layers="0"
+	 custom-color="#9748d9"
+	 src-table="public.buy"
+	 dst-table="public.item" reference-fk="fk_buy_item1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_buy_user" type="relfk" layers="0"
+	 custom-color="#e621e5"
+	 src-table="public.buy"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_buy_user1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_buy_coin_buy" type="relfk" layers="0"
+	 custom-color="#35e04b"
+	 src-table="public.buy_coin"
+	 dst-table="public.buy" reference-fk="fk_buy_has_coin_buy1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_buy_coin_coin" type="relfk" layers="0"
+	 custom-color="#6eca32"
+	 src-table="public.buy_coin"
+	 dst-table="public.coin" reference-fk="fk_buy_has_coin_coin1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_session_session" type="relfk" layers="0"
+	 custom-color="#07784e"
+	 src-table="public.session"
+	 dst-table="public.session" reference-fk="fk_session_session1"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="1725.68" y="1193.64"/>
+	<position x="1725.68" y="1078"/>
+	<position x="1589.12" y="1078"/>
+	</line>
+</relationship>
+
+<relationship name="rel_session_user" type="relfk" layers="0"
+	 custom-color="#a6e039"
+	 src-table="public.session"
+	 dst-table="public.&quot;user&quot;" reference-fk="fk_session_user1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_interaction_activity" type="relfk" layers="0"
+	 custom-color="#4d49ff"
+	 src-table="public.interaction"
+	 dst-table="public.activity" reference-fk="fk_interaction_activity1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_interaction_session_interaction" type="relfk" layers="0"
+	 custom-color="#5fc7e0"
+	 src-table="public.interaction_session"
+	 dst-table="public.interaction" reference-fk="fk_interaction_has_session_interaction1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_interaction_session_session" type="relfk" layers="0"
+	 custom-color="#15d492"
+	 src-table="public.interaction_session"
+	 dst-table="public.session" reference-fk="fk_interaction_has_session_session1"
+	 src-required="false" dst-required="true"/>
+
+<permission>
+	<object name="public" type="schema"/>
+	<roles names="pg_database_owner"/>
+	<privileges create="true" usage="true"/>
+</permission>
+<permission>
+	<object name="public" type="schema"/>
+	<privileges usage="true"/>
+</permission>
+</dbmodel>

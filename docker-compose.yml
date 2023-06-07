@@ -14,20 +14,11 @@ services:
         soft: 100000
         hard: 100000
   db:
-    image: mysql:latest
+    image: postgres:15
     environment:
-      MYSQL_ROOT_PASSWORD: dbpassword
-      MYSQL_DATABASE: chess
-    command: --default-authentication-plugin=mysql_native_password
-    volumes:
-      - db:/var/lib/mysql
+      POSTGRES_PASSWORD: dbpassword
     ports:
-      - 3306:3306
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 100000
-        hard: 100000
+      - 5432:5432
   proxy:
     image: nginx:latest
     volumes:
@@ -47,6 +38,3 @@ services:
     volumes:
       - "./proxysql.cnf:/etc/proxysql.cnf"
     image: proxysql/proxysql
-
-volumes:
-  db: {}

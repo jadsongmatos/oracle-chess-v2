@@ -1,11 +1,195 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model achievement {
+  id               Int                @id
+  name             String             @unique(map: "name_unique") @db.VarChar(45)
+  description      String             @unique(map: "description_unique") @db.VarChar(45)
+  achievement_user achievement_user[]
+}
+
+model achievement_user {
+  achievement_id Int
+  user_id        Int
+  achievement    achievement @relation(fields: [achievement_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_achievement_has_user_achievement1")
+  user           user        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_achievement_has_user_user1")
+
+  @@id([achievement_id, user_id])
+  @@index([achievement_id], map: "fk_achievement_has_user_achievement1_idx")
+  @@index([user_id], map: "fk_achievement_has_user_user1_idx")
+}
+
+model activity {
+  id          Int           @id
+  name        String        @db.VarChar(255)
+  interaction interaction[]
+}
+
+model buy {
+  id            Int        @id
+  price_at_time Int
+  stock_at_time Int
+  create_time   DateTime   @default(now()) @db.Timestamp(6)
+  state         Boolean    @default(true)
+  item_id       Int
+  user_id       Int
+  item          item       @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_buy_item1")
+  user          user       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_buy_user1")
+  buy_coin      buy_coin[]
+
+  @@index([item_id], map: "fk_buy_item1_idx")
+  @@index([user_id], map: "fk_buy_user1_idx")
+}
+
+model buy_coin {
+  buy_id  Int
+  coin_id Int
+  buy     buy  @relation(fields: [buy_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_buy_has_coin_buy1")
+  coin    coin @relation(fields: [coin_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_buy_has_coin_coin1")
+
+  @@id([buy_id, coin_id])
+  @@index([buy_id], map: "fk_buy_has_coin_buy1_idx")
+  @@index([coin_id], map: "fk_buy_has_coin_coin1_idx")
+}
+
+model click {
+  idclick     String   @id @db.VarChar(255)
+  create_time DateTime @default(now()) @db.Timestamp(6)
+  others      String   @db.VarChar(255)
+  link_id     Int
+  link        link     @relation(fields: [link_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_click_link1")
+
+  @@index([link_id], map: "fk_click_link1_idx")
+}
+
+model coin {
+  id              Int        @id
+  currency_origin Int
+  state           Boolean    @default(true)
+  user_id         Int
+  buy_coin        buy_coin[]
+  user            user       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_coin_user1")
+
+  @@index([user_id], map: "fk_coin_user1_idx")
+}
+
+model friend {
+  user_id                     Int
+  friend_id                   Int
+  user_friend_user_idTouser   user @relation("friend_user_idTouser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_friends_user1")
+  user_friend_friend_idTouser user @relation("friend_friend_idTouser", fields: [friend_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_friends_user2")
+
+  @@id([user_id, friend_id])
+  @@index([user_id], map: "fk_friends_user1_idx")
+  @@index([friend_id], map: "fk_friends_user2_idx")
+}
+
+model interaction {
+  id                  Int                   @id
+  create_time         DateTime              @default(now()) @db.Timestamp(6)
+  activity_id         Int
+  activity            activity              @relation(fields: [activity_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_interaction_activity1")
+  interaction_session interaction_session[]
+
+  @@index([activity_id], map: "fk_interaction_activity1_idx")
+}
+
+model interaction_session {
+  interaction_id Int
+  session_id     Int
+  interaction    interaction @relation(fields: [interaction_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_interaction_has_session_interaction1")
+  session        session     @relation(fields: [session_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_interaction_has_session_session1")
+
+  @@id([interaction_id, session_id])
+  @@index([interaction_id], map: "fk_interaction_has_session_interaction1_idx")
+  @@index([session_id], map: "fk_interaction_has_session_session1_idx")
+}
+
+model item {
+  id          Int    @id
+  name        String @db.VarChar(45)
+  description String @db.VarChar(45)
+  cost        Int
+  stock       Int
+  buy         buy[]
+}
+
+model link {
+  id          Int      @id
+  url         String   @db.VarChar(45)
+  create_time DateTime @default(now()) @db.Timestamp(6)
+  user_id     Int
+  click       click[]
+  user        user     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_link_user1")
+
+  @@index([user_id], map: "fk_link_user1_idx")
+}
+
+model location {
+  id        Int     @id
+  latitude  Decimal @db.Decimal
+  longitude Decimal @db.Decimal
+  city      String  @db.VarChar(45)
+  state     String  @db.Char(2)
+  nation    String  @db.VarChar(45)
+  user_id   Int
+  user      user    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_location_user1")
+
+  @@index([user_id], map: "fk_location_user1_idx")
+}
+
+model session {
+  id                        Int                     @id
+  create_time               DateTime                @default(now()) @db.Timestamp(6)
+  end_time_new_session_time Int?
+  total_active_time         Unsupported("interval") @default(dbgenerated("'00:00:00'::interval"))
+  user_id                   Int
+  interaction_session       interaction_session[]
+  session                   session?                @relation("sessionTosession", fields: [end_time_new_session_time], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session_session1")
+  other_session             session[]               @relation("sessionTosession")
+  user                      user                    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session_user1")
+
+  @@index([end_time_new_session_time], map: "fk_session_session1_idx")
+  @@index([user_id], map: "fk_session_user1_idx")
+}
+
+model tree {
+  id          Int      @id
+  value       Int
+  depth       Int
+  gameover    Boolean  @default(false)
+  checkmate   Boolean  @default(false)
+  update_time DateTime @default(now()) @db.Timestamp(6)
+  user_id     Int
+  parent_id   Int
+  tree        tree     @relation("treeTotree", fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_table1_table11")
+  other_tree  tree[]   @relation("treeTotree")
+  user        user     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_table1_user1")
+
+  @@index([parent_id], map: "fk_table1_table11_idx")
+  @@index([user_id], map: "fk_table1_user1_idx")
+}
+
+model user {
+  id                            Int                @id
+  username                      String             @db.VarChar(16)
+  email                         String             @db.VarChar(255)
+  password                      String             @db.VarChar(32)
+  create_time                   DateTime           @default(now()) @db.Timestamp(6)
+  update_time                   DateTime?          @db.Timestamp(6)
+  achievement_user              achievement_user[]
+  buy                           buy[]
+  coin                          coin[]
+  friend_friend_user_idTouser   friend[]           @relation("friend_user_idTouser")
+  friend_friend_friend_idTouser friend[]           @relation("friend_friend_idTouser")
+  link                          link[]
+  location                      location[]
+  session                       session[]
+  tree                          tree[]
 }
