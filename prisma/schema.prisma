@@ -16,7 +16,7 @@ model achievement {
 
 model achievement_user {
   achievement_id Int
-  user_id        Int
+  user_id        String
   achievement    achievement @relation(fields: [achievement_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_achievement_has_user_achievement1")
   user           user        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_achievement_has_user_user1")
 
@@ -38,7 +38,7 @@ model buy {
   create_time   DateTime   @default(now()) @db.Timestamp(6)
   state         Boolean    @default(true)
   item_id       Int
-  user_id       Int
+  user_id       String
   item          item       @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_buy_item1")
   user          user       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_buy_user1")
   buy_coin      buy_coin[]
@@ -72,7 +72,7 @@ model coin {
   id              Int        @id
   currency_origin Int
   state           Boolean    @default(true)
-  user_id         Int
+  user_id         String
   buy_coin        buy_coin[]
   user            user       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_coin_user1")
 
@@ -80,8 +80,8 @@ model coin {
 }
 
 model friend {
-  user_id                     Int
-  friend_id                   Int
+  user_id                     String
+  friend_id                   String
   user_friend_user_idTouser   user @relation("friend_user_idTouser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_friends_user1")
   user_friend_friend_idTouser user @relation("friend_friend_idTouser", fields: [friend_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_friends_user2")
 
@@ -124,7 +124,7 @@ model link {
   id          Int      @id
   url         String   @db.VarChar(45)
   create_time DateTime @default(now()) @db.Timestamp(6)
-  user_id     Int
+  user_id     String
   click       click[]
   user        user     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_link_user1")
 
@@ -138,7 +138,7 @@ model location {
   city      String  @db.VarChar(45)
   state     String  @db.Char(2)
   nation    String  @db.VarChar(45)
-  user_id   Int
+  user_id   String
   user      user    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_location_user1")
 
   @@index([user_id], map: "fk_location_user1_idx")
@@ -149,7 +149,7 @@ model session {
   create_time               DateTime                @default(now()) @db.Timestamp(6)
   end_time_new_session_time Int?
   total_active_time         Unsupported("interval") @default(dbgenerated("'00:00:00'::interval"))
-  user_id                   Int
+  user_id                   String
   interaction_session       interaction_session[]
   session                   session?                @relation("sessionTosession", fields: [end_time_new_session_time], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session_session1")
   other_session             session[]               @relation("sessionTosession")
@@ -166,7 +166,7 @@ model tree {
   gameover    Boolean  @default(false)
   checkmate   Boolean  @default(false)
   update_time DateTime @default(now()) @db.Timestamp(6)
-  user_id     Int
+  user_id     String
   parent_id   Int
   tree        tree     @relation("treeTotree", fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_table1_table11")
   other_tree  tree[]   @relation("treeTotree")
@@ -177,7 +177,7 @@ model tree {
 }
 
 model user {
-  id                            Int                @id
+  id                            String             @id @default(uuid())
   username                      String             @db.VarChar(16)
   email                         String             @db.VarChar(255)
   password                      String             @db.VarChar(32)
