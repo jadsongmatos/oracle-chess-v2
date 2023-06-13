@@ -4,7 +4,9 @@ import dynamic from "next/dynamic";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const Chessground = dynamic(() => import("react-chessground"), { ssr: false });
+const Chessground:any = dynamic(() => import("react-chessground" as any), {
+  ssr: false,
+});
 
 export default function Home() {
   const [cpu_threads, set_cpu_threads] = useState(1);
