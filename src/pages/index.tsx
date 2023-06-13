@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const Chessground:any = dynamic(() => import("react-chessground" as any), {
+const Chessground: any = dynamic(() => import("react-chessground" as any), {
   ssr: false,
 });
 
@@ -190,6 +190,21 @@ export default function Home() {
           ></input>
         </section>
       </main>
+      <nav className="navbar fixed-bottom bg-body-tertiary rounded-top shadow-lg bg-primary" data-bs-theme="dark">
+        <div className="container-fluid">
+          <div className="form-check form-switch mx-auto">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheck"
+            />
+            <label className="form-check-label" htmlFor="flexSwitchCheck">
+              Iniciar
+            </label>
+          </div>
+        </div>
+      </nav>
     </>
   );
 }
