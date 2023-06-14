@@ -8,7 +8,10 @@ const Chessground: any = dynamic(() => import("react-chessground" as any), {
   ssr: false,
 });
 
-export type New_job = Move[];
+export interface New_job {
+  moves: Array<Move>;
+  id: number;
+}
 
 export interface Move {
   move: number;
@@ -20,38 +23,51 @@ export default function Home() {
   const [n_threads, set_threads] = useState(1);
   const [start, set_start] = useState(false);
   const [jobs, set_jobs] = useState<Array<New_job>>([]);
+  const [job_id, set_job_id] = useState(0);
+  const [chess_grounds, set_chess_grounds] = useState<Array<any>>([null]);
+  const [chess_grounds_progress, set_chess_grounds_progress] = useState<any>();
 
   const workers_ref: any = useRef([]);
 
   useEffect(() => {
-    const max_threads = window.navigator.hardwareConcurrency;
-    set_cpu_threads(max_threads);
+    const hardwareConcurrency = window.navigator.hardwareConcurrency;
+    set_cpu_threads(hardwareConcurrency);
 
-    for (let i = 0; i < max_threads; i++) {
-      workers_ref.current[i] = new Worker("/workers/job.js");
+    for (let i = 0; i < hardwareConcurrency; i++) {
+      workers_ref.current[i] = new Worker(
+        new URL("../workers/job.ts", import.meta.url)
+      );
+
+      workers_ref.current[i].onmessage = (event: any) => {
+        //console.log("worker:", i, event);
+        if (event.data.type == "progress") {
+          set_chess_grounds_progress({ data: event.data, id: i });
+          console.log("progress", i, event.data.moves);
+        } else {
+          set_jobs(jobs.filter((job) => job.id !== event.data.id));
+        }
+      };
+
+      //workers_ref.current[i].terminate();
     }
   }, []);
 
   useEffect(() => {
-    const myWorker = new Worker("/workers/job.js");
+    chess_grounds[chess_grounds_progress?.id] = chess_grounds_progress?.data;
+  }, [chess_grounds_progress, chess_grounds]);
 
-    myWorker.postMessage("jadson"); // send data to the worker
-
-    myWorker.onmessage = (event) => {
-      // listen for messages from the worker
-      console.log("recebendo message", event.data);
-    };
-
-    return () => {
-      // clean up when the component unmounts
-      myWorker.terminate();
-    };
-  }, []);
+  useEffect(() => {
+    if (start == true) {
+      for (let i = 0; i < jobs.length; i++) {
+        workers_ref.current[i % n_threads].postMessage({ job: jobs[i] });
+      }
+    }
+  }, [jobs, start, n_threads]);
 
   const add_job = async () => {
-    let new_job: New_job = [];
+    let new_job: Array<Move> = [];
     try {
-      const response = await fetch("http://localhost:3000/api/tree", {
+      const response = await fetch("/api/tree", {
         method: "GET",
         redirect: "follow",
       });
@@ -61,19 +77,25 @@ export default function Home() {
       console.log("error ", error);
     }
     console.log("new_job", new_job);
-    jobs.push(new_job);
+
+    let new_id = job_id + 1;
+    set_job_id(new_id);
+    jobs.push({ moves: new_job, id: new_id });
     console.log("jobs", jobs);
   };
 
   const incrementar = async () => {
     if (n_threads < cpu_threads) {
       set_threads(n_threads + 1);
+      //add_job();
+      chess_grounds.push(null);
     }
   };
 
   const decrementar = async () => {
     if (n_threads > 1) {
       set_threads(n_threads - 1);
+      chess_grounds.pop();
     }
   };
 
@@ -110,75 +132,26 @@ export default function Home() {
         <section className="container my-5">
           <p>CPU: {cpu_threads} </p>
           <p></p>
+          <ol>
+            {jobs
+              ? jobs.map((job: any, i: number) => {
+                  return <li key={i}>{JSON.stringify(job)}</li>;
+                })
+              : null}
+          </ol>
         </section>
         <section className="container">
           <div className="row">
-            {n_threads > 1 ? (
-              <>
-                <div className="col-md-6">
-                  <ol className="list-group-numbered">
-                    {Array.from(
-                      { length: Math.ceil(n_threads / 2) },
-                      (v, i) => {
-                        return (
-                          <li key={i} className="mb-5">
-                            <div className="mx-auto">
-                              <Chessground
-                                fen={
-                                  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                                }
-                                style={{
-                                  width: "200px",
-                                  height: "200px",
-                                  marginRight: "auto",
-                                  marginLeft: "auto",
-                                }}
-                                viewOnly={true}
-                                draggable={{ enabled: false }}
-                                addDimensionsCssVars={false}
-                              />
-                            </div>
-                          </li>
-                        );
-                      }
-                    )}
-                  </ol>
-                </div>
-                <div className="col-md-6">
-                  <ol className="list-group-numbered">
-                    {Array.from({ length: n_threads / 2 }, (v, i) => {
-                      return (
-                        <li key={i} className="mb-5">
-                          <div className="mx-auto">
-                            <Chessground
-                              fen={
-                                "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                              }
-                              style={{
-                                width: "200px",
-                                height: "200px",
-                                marginRight: "auto",
-                                marginLeft: "auto",
-                              }}
-                              viewOnly={true}
-                              draggable={{ enabled: false }}
-                              addDimensionsCssVars={false}
-                            />
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                </div>
-              </>
-            ) : (
-              <div className="col-md-6">
-                <ol className="list-group-numbered">
-                  <li key={1} className="mb-5">
+            <ol className="list-group-numbered row">
+              {chess_grounds.map((e, i) => {
+                return (
+                  <li key={i} className="mb-5 text-center col-md-4">
                     <div className="mx-auto">
                       <Chessground
                         fen={
-                          "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                          e
+                            ? e.fen
+                            : "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
                         }
                         style={{
                           width: "200px",
@@ -191,10 +164,18 @@ export default function Home() {
                         addDimensionsCssVars={false}
                       />
                     </div>
+                    <br />
+                    <p>
+                      {chess_grounds[0]
+                        ? Math.ceil(
+                            ((chess_grounds[0].moves * 100) / 30) ^ 3.5
+                          ) + "%"
+                        : "0%"}
+                    </p>
                   </li>
-                </ol>
-              </div>
-            )}
+                );
+              })}
+            </ol>
           </div>
         </section>
       </main>
@@ -265,12 +246,14 @@ export default function Home() {
                 type="button"
                 className="btn btn-outline-primary"
                 onClick={() => {
-                  add_job();
-                  if (start == false) {
-                    set_start(true);
-                    workers_ref.current[0].postMessage("start");
-                  } else {
-                    set_start(false);
+                  set_start(!start);
+                  const n_idle_threads = n_threads - jobs.length;
+                  try {
+                    for (let i = 0; i < n_idle_threads; i++) {
+                      add_job();
+                    }
+                  } catch (err) {
+                    console.log(err);
                   }
                 }}
               >
