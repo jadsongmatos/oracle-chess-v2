@@ -1,0 +1,29 @@
+{
+  "name": "Oracle Chess",
+  "short_name": "oracle-chess",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#ffffff",
+  "background_color": "#000000",
+  "scope": "https://oracle-chess.vercel.app/",
+  "start_url": "/",
+  "description": "Jogo de xadrez",
+  "purpose": "any",
+  "icons": [
+    {
+      "src": "/ico/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/chess-1-1-256x.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/chess-1-1-512x.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

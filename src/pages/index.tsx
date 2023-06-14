@@ -2,26 +2,76 @@ import Head from "next/head";
 //import Image from 'next/image'
 import dynamic from "next/dynamic";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Chessground: any = dynamic(() => import("react-chessground" as any), {
   ssr: false,
 });
 
+export type New_job = Move[];
+
+export interface Move {
+  move: number;
+  id: number;
+}
+
 export default function Home() {
   const [cpu_threads, set_cpu_threads] = useState(1);
   const [n_threads, set_threads] = useState(1);
+  const [start, set_start] = useState(false);
+  const [jobs, set_jobs] = useState<Array<New_job>>([]);
+
+  const workers_ref: any = useRef([]);
+
   useEffect(() => {
-    set_cpu_threads(window.navigator.hardwareConcurrency);
+    const max_threads = window.navigator.hardwareConcurrency;
+    set_cpu_threads(max_threads);
+
+    for (let i = 0; i < max_threads; i++) {
+      workers_ref.current[i] = new Worker("/workers/job.js");
+    }
   }, []);
 
-  const incrementar = () => {
+  useEffect(() => {
+    const myWorker = new Worker("/workers/job.js");
+
+    myWorker.postMessage("jadson"); // send data to the worker
+
+    myWorker.onmessage = (event) => {
+      // listen for messages from the worker
+      console.log("recebendo message", event.data);
+    };
+
+    return () => {
+      // clean up when the component unmounts
+      myWorker.terminate();
+    };
+  }, []);
+
+  const add_job = async () => {
+    let new_job: New_job = [];
+    try {
+      const response = await fetch("http://localhost:3000/api/tree", {
+        method: "GET",
+        redirect: "follow",
+      });
+      new_job = await response.json();
+      new_job.sort((a, b) => a.id - b.id);
+    } catch (error) {
+      console.log("error ", error);
+    }
+    console.log("new_job", new_job);
+    jobs.push(new_job);
+    console.log("jobs", jobs);
+  };
+
+  const incrementar = async () => {
     if (n_threads < cpu_threads) {
       set_threads(n_threads + 1);
     }
   };
 
-  const decrementar = () => {
+  const decrementar = async () => {
     if (n_threads > 1) {
       set_threads(n_threads - 1);
     }
@@ -146,9 +196,47 @@ export default function Home() {
               </div>
             )}
           </div>
+        </section>
+      </main>
+      <nav
+        className="navbar fixed-bottom bg-body-tertiary rounded-top shadow-lg bg-primary"
+        data-bs-theme="dark"
+      >
+        <div className="container-fluid">
+          <input
+            type="range"
+            className="form-range col-12"
+            min={1}
+            max={cpu_threads}
+            step={1}
+            value={n_threads}
+            readOnly={false}
+            onChange={(event) => {
+              const newValue = parseInt(event.target.value);
+              console.log("range", newValue);
+              set_threads(newValue);
+            }}
+          ></input>
+          <div
+            className="progress w-100 mb-3"
+            role="progressbar"
+            aria-label="Example with label"
+            aria-valuenow={(n_threads / cpu_threads) * 100}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          >
+            <div
+              className="progress-bar"
+              style={{
+                width: (n_threads / cpu_threads) * 100 + "%",
+              }}
+            >
+              {Math.ceil((n_threads / cpu_threads) * 100) + "%"}
+            </div>
+          </div>
 
           <div
-            className="col-12 mt-5  btn-group btn-group-lg"
+            className="col-12 btn-group btn-group-lg"
             role="group"
             aria-label="Large button group"
           >
@@ -159,9 +247,36 @@ export default function Home() {
             >
               -
             </button>
-            <button type="button" className="btn btn-outline-primary">
-              Threads: {n_threads}
-            </button>
+            {start ? (
+              <button
+                type="button"
+                className="btn btn-outline-primary active "
+                onClick={() => set_start(!start)}
+              >
+                <span
+                  className="spinner-border spinner-border-sm mx-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => {
+                  add_job();
+                  if (start == false) {
+                    set_start(true);
+                    workers_ref.current[0].postMessage("start");
+                  } else {
+                    set_start(false);
+                  }
+                }}
+              >
+                Iniciar
+              </button>
+            )}
             <button
               type="button"
               className="btn btn-outline-primary"
@@ -169,39 +284,6 @@ export default function Home() {
             >
               +
             </button>
-          </div>
-          <label htmlFor="rangeThread" className="form-label mt-3 ">
-            Example range
-          </label>
-          <input
-            type="range"
-            className="form-range col-12"
-            min={1}
-            max={cpu_threads}
-            step={1}
-            value={n_threads}
-            readOnly={false}
-            id="rangeThread"
-            onChange={(event) => {
-              const newValue = parseInt(event.target.value);
-              console.log("range", newValue);
-              set_threads(newValue);
-            }}
-          ></input>
-        </section>
-      </main>
-      <nav className="navbar fixed-bottom bg-body-tertiary rounded-top shadow-lg bg-primary" data-bs-theme="dark">
-        <div className="container-fluid">
-          <div className="form-check form-switch mx-auto">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheck"
-            />
-            <label className="form-check-label" htmlFor="flexSwitchCheck">
-              Iniciar
-            </label>
           </div>
         </div>
       </nav>
