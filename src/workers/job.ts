@@ -2,8 +2,11 @@ import { Chess } from "chess.js";
 
 function map_gameover_depth4(game: Chess) {
   var moves = 0;
+  var new_moves = 0;
   var fen_game2d = "";
-  return game.moves({ verbose: false }).map((move1d) => {
+  var start_time = performance.now();
+
+  const map = game.moves({ verbose: false }).map((move1d) => {
     let game1d = new Chess(game.fen());
     game1d.move(move1d);
 
@@ -29,9 +32,15 @@ function map_gameover_depth4(game: Chess) {
 
         self.postMessage({
           type: "progress",
-          moves,
+          moves: moves,
+          new_moves,
           fen: fen_game2d,
+          duration: performance.now() - start_time,
+          moves_PerSec: Math.ceil(
+            moves / ((performance.now() - start_time) / 1000)
+          ),
         });
+        new_moves = 0;
 
         const game_over3d = game3d.isGameOver();
         if (game_over3d) {
@@ -42,6 +51,7 @@ function map_gameover_depth4(game: Chess) {
           let game4d = new Chess(game3d.fen());
           game4d.move(move4d);
           moves++;
+          new_moves++
 
           return {
             gameover: game4d.isGameOver(),
@@ -55,14 +65,19 @@ function map_gameover_depth4(game: Chess) {
       return [{ gameover: game_over2d, checkmate: false }, moves3dResult];
     });
 
-    self.postMessage({
-      type: "progress",
-      moves,
-      fen: fen_game2d,
-    });
-
     return [{ gameover: game_over1d, checkmate: false }, moves1dResult];
   });
+
+  self.postMessage({
+    type: "progress",
+    moves,
+    fen: fen_game2d,
+    new_moves,
+    duration: performance.now() - start_time,
+    moves_PerSec: Math.ceil(moves / (performance.now() / 1000)),
+  });
+
+  return map;
 }
 
 export interface Move {
@@ -95,6 +110,6 @@ self.onmessage = (event) => {
   self.postMessage({
     type: "then",
     data: chess_map,
-    id: event.data.job.id
+    id: event.data.job.id,
   });
 };

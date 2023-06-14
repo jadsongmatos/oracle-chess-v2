@@ -26,6 +26,8 @@ export default function Home() {
   const [job_id, set_job_id] = useState(0);
   const [chess_grounds, set_chess_grounds] = useState<Array<any>>([null]);
   const [msg_worker, set_msg_worker] = useState<any>();
+  const [moves, set_moves] = useState(0);
+  const [start_time, set_start_time] = useState(performance.now());
 
   const workers_ref: any = useRef([]);
 
@@ -49,13 +51,15 @@ export default function Home() {
 
   useEffect(() => {
     if (msg_worker?.data?.type == "progress") {
-      chess_grounds[msg_worker?.id] = msg_worker?.data;
+      chess_grounds[msg_worker?.id] = msg_worker.data;
+      set_moves(moves + msg_worker.data.new_moves);
+
     } else if (msg_worker?.data?.type == "then") {
-      console.log("msg_worker",msg_worker,jobs)
+      console.log("msg_worker", msg_worker, jobs);
       set_jobs(jobs.filter((job) => job.id !== msg_worker.data.id));
     }
-    set_msg_worker(null)
-  }, [msg_worker, chess_grounds, jobs]);
+    set_msg_worker(null);
+  }, [msg_worker, chess_grounds, jobs, moves]);
 
   useEffect(() => {
     console.log("starting", start);
@@ -139,8 +143,10 @@ export default function Home() {
           <h1>Oracle Chess</h1>
         </section>
         <section className="container my-5">
-          <p>CPU: {cpu_threads} </p>
-          <p></p>
+          <p>
+            CPU: {cpu_threads} Total: {moves}{" "}
+          </p>
+          <p>{Math.ceil(moves / ((performance.now() - start_time) / 1000))} Movimentos/s</p>
           <ol>
             {jobs
               ? jobs.map((job: any, i: number) => {
@@ -174,11 +180,7 @@ export default function Home() {
                       />
                     </div>
                     <br />
-                    <p>
-                      {e
-                        ? Math.ceil((e.moves * 100) / Math.pow(30, 3.5)) + "%"
-                        : "0%"}
-                    </p>
+                    <p>{(e ? e.moves_PerSec : 0) + " Movimentos/s"}</p>
                   </li>
                 );
               })}
