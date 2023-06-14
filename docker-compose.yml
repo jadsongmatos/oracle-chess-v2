@@ -26,12 +26,13 @@ services:
       - ./.next/:/next/.next/
     network_mode: "host"
 
-  phpmyadmin:
-    image: phpmyadmin
+  pgadmin4:
     ports:
-      - 8081:80
+        - 8081:80
     environment:
-      - PMA_ARBITRARY=1
+        - PGADMIN_DEFAULT_EMAIL=user@domain.com
+        - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+    image: dpage/pgadmin4
       
   proxysql:
     network_mode: "host"
