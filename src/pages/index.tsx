@@ -25,7 +25,7 @@ export default function Home() {
   const [jobs, set_jobs] = useState<Array<New_job>>([]);
   const [job_id, set_job_id] = useState(0);
   const [chess_grounds, set_chess_grounds] = useState<Array<any>>([null]);
-  const [chess_grounds_progress, set_chess_grounds_progress] = useState<any>();
+  const [msg_worker, set_msg_worker] = useState<any>();
 
   const workers_ref: any = useRef([]);
 
@@ -39,13 +39,8 @@ export default function Home() {
       );
 
       workers_ref.current[i].onmessage = (event: any) => {
-        //console.log("worker:", i, event);
-        if (event.data.type == "progress") {
-          set_chess_grounds_progress({ data: event.data, id: i });
-          console.log("progress", i, event.data.moves);
-        } else {
-          set_jobs(jobs.filter((job) => job.id !== event.data.id));
-        }
+        set_msg_worker({ data: event.data, id: i });
+        //console.log("progress", i, event.data.moves);
       };
 
       //workers_ref.current[i].terminate();
@@ -53,10 +48,17 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    chess_grounds[chess_grounds_progress?.id] = chess_grounds_progress?.data;
-  }, [chess_grounds_progress, chess_grounds]);
+    if (msg_worker?.data?.type == "progress") {
+      chess_grounds[msg_worker?.id] = msg_worker?.data;
+    } else if (msg_worker?.data?.type == "then") {
+      console.log("msg_worker",msg_worker,jobs)
+      set_jobs(jobs.filter((job) => job.id !== msg_worker.data.id));
+    }
+    set_msg_worker(null)
+  }, [msg_worker, chess_grounds, jobs]);
 
   useEffect(() => {
+    console.log("starting", start);
     if (start == true) {
       for (let i = 0; i < jobs.length; i++) {
         workers_ref.current[i % n_threads].postMessage({ job: jobs[i] });
@@ -64,23 +66,30 @@ export default function Home() {
     }
   }, [jobs, start, n_threads]);
 
-  const add_job = async () => {
-    let new_job: Array<Move> = [];
-    try {
-      const response = await fetch("/api/tree", {
-        method: "GET",
-        redirect: "follow",
-      });
-      new_job = await response.json();
-      new_job.sort((a, b) => a.id - b.id);
-    } catch (error) {
-      console.log("error ", error);
-    }
-    console.log("new_job", new_job);
-
+  const add_job = async (number: number, start: boolean) => {
+    let new_jobs = jobs;
     let new_id = job_id + 1;
+    try {
+      let new_job: Array<Move> = [];
+      for (let i = 0; i < number; i++) {
+        const response = await fetch("/api/tree", {
+          method: "GET",
+          redirect: "follow",
+        });
+        new_job = await response.json();
+        new_job.sort((a, b) => a.id - b.id);
+        console.log("new_job", new_job);
+
+        new_id++;
+        new_jobs.push({ moves: new_job, id: new_id });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
     set_job_id(new_id);
-    jobs.push({ moves: new_job, id: new_id });
+    set_jobs(new_jobs);
+    set_start(start);
     console.log("jobs", jobs);
   };
 
@@ -166,10 +175,8 @@ export default function Home() {
                     </div>
                     <br />
                     <p>
-                      {chess_grounds[0]
-                        ? Math.ceil(
-                            ((chess_grounds[0].moves * 100) / 30) ^ 3.5
-                          ) + "%"
+                      {e
+                        ? Math.ceil((e.moves * 100) / Math.pow(30, 3.5)) + "%"
                         : "0%"}
                     </p>
                   </li>
@@ -246,15 +253,8 @@ export default function Home() {
                 type="button"
                 className="btn btn-outline-primary"
                 onClick={() => {
-                  set_start(!start);
                   const n_idle_threads = n_threads - jobs.length;
-                  try {
-                    for (let i = 0; i < n_idle_threads; i++) {
-                      add_job();
-                    }
-                  } catch (err) {
-                    console.log(err);
-                  }
+                  add_job(n_idle_threads, !start);
                 }}
               >
                 Iniciar
