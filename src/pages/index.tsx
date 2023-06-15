@@ -8,6 +8,8 @@ const Chessground: any = dynamic(() => import("react-chessground" as any), {
   ssr: false,
 });
 
+import Header from "@/components/header";
+
 export interface New_job {
   moves: Array<Move>;
   id: number;
@@ -37,7 +39,7 @@ export default function Home() {
 
     for (let i = 0; i < hardwareConcurrency; i++) {
       workers_ref.current[i] = new Worker(
-        new URL("../workers/job.ts", import.meta.url)
+        new URL("@/workers/job.ts", import.meta.url)
       );
 
       workers_ref.current[i].onmessage = (event: any) => {
@@ -53,7 +55,6 @@ export default function Home() {
     if (msg_worker?.data?.type == "progress") {
       chess_grounds[msg_worker?.id] = msg_worker.data;
       set_moves(moves + msg_worker.data.new_moves);
-
     } else if (msg_worker?.data?.type == "then") {
       console.log("msg_worker", msg_worker, jobs);
       set_jobs(jobs.filter((job) => job.id !== msg_worker.data.id));
@@ -115,29 +116,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta name="description" content="Jogo de xadrez" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <meta name="description" content="Jogo de xadrez" />
-        <meta
-          property="og:url"
-          content="https://github.com/jadsongmatos/oracle-chess"
-        />
-        <meta property="og:site_name" content="Oracle Chess" />
-        <meta property="og:title" content="Oracle Chess" />
-        <meta property="og:image" content="/favicon.ico" />
-        <meta property="og:description" content="Oracle Chess" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:site_name" content="Oracle Chess" />
-        <meta name="twitter:title" content="Oracle Chess" />
-        <meta name="twitter:card" content="Jogo de xadrez" />
-        <meta name="twitter:description" content="Oracle Chess" />
-        <meta name="twitter:image" content="/favicon.ico" />
-        <meta name="image" content="/favicon.ico" />
         <title>Oracle Chess</title>
       </Head>
+      <Header />
+
       <main className="mt-5 py-5">
         <section className="container mb-5 text-center">
           <h1>Oracle Chess</h1>
@@ -146,7 +128,10 @@ export default function Home() {
           <p>
             CPU: {cpu_threads} Total: {moves}{" "}
           </p>
-          <p>{Math.ceil(moves / ((performance.now() - start_time) / 1000))} Movimentos/s</p>
+          <p>
+            {Math.ceil(moves / ((performance.now() - start_time) / 1000))}{" "}
+            Movimentos/s
+          </p>
           <ol>
             {jobs
               ? jobs.map((job: any, i: number) => {
@@ -156,36 +141,34 @@ export default function Home() {
           </ol>
         </section>
         <section className="container">
-          <div className="row">
-            <ol className="list-group-numbered row">
-              {chess_grounds.map((e, i) => {
-                return (
-                  <li key={i} className="mb-5 text-center col-md-4">
-                    <div className="mx-auto">
-                      <Chessground
-                        fen={
-                          e
-                            ? e.fen
-                            : "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-                        }
-                        style={{
-                          width: "200px",
-                          height: "200px",
-                          marginRight: "auto",
-                          marginLeft: "auto",
-                        }}
-                        viewOnly={true}
-                        draggable={{ enabled: false }}
-                        addDimensionsCssVars={false}
-                      />
-                    </div>
-                    <br />
-                    <p>{(e ? e.moves_PerSec : 0) + " Movimentos/s"}</p>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
+          <ol className="list-group-numbered row">
+            {chess_grounds.map((e, i) => {
+              return (
+                <li key={i} className="mb-5 text-center col-md-4">
+                  <div className="mx-auto">
+                    <Chessground
+                      fen={
+                        e
+                          ? e.fen
+                          : "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+                      }
+                      style={{
+                        width: "200px",
+                        height: "200px",
+                        marginRight: "auto",
+                        marginLeft: "auto",
+                      }}
+                      viewOnly={true}
+                      draggable={{ enabled: false }}
+                      addDimensionsCssVars={false}
+                    />
+                  </div>
+                  <br />
+                  <p>{(e ? e.moves_PerSec : 0) + " Movimentos/s"}</p>
+                </li>
+              );
+            })}
+          </ol>
         </section>
       </main>
       <nav

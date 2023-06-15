@@ -7,13 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model achievement {
-  id               Int                @id
-  name             String             @unique(map: "name_unique") @db.VarChar(45)
-  description      String             @unique(map: "description_unique") @db.VarChar(45)
-  achievement_user achievement_user[]
-}
-
 model achievement_user {
   achievement_id Int
   user_id        String
@@ -79,17 +72,6 @@ model coin {
   @@index([user_id], map: "fk_coin_user1_idx")
 }
 
-model friend {
-  user_id                     String
-  friend_id                   String
-  user_friend_user_idTouser   User   @relation("friend_user_idTouser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_friends_user1")
-  user_friend_friend_idTouser User   @relation("friend_friend_idTouser", fields: [friend_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_friends_user2")
-
-  @@id([user_id, friend_id])
-  @@index([user_id], map: "fk_friends_user1_idx")
-  @@index([friend_id], map: "fk_friends_user2_idx")
-}
-
 model interaction {
   id                  Int                   @id
   create_time         DateTime              @default(now()) @db.Timestamp(6)
@@ -131,19 +113,6 @@ model link {
   @@index([user_id], map: "fk_link_user1_idx")
 }
 
-model location {
-  id        Int     @id
-  latitude  Decimal @db.Decimal
-  longitude Decimal @db.Decimal
-  city      String  @db.VarChar(45)
-  state     String  @db.Char(2)
-  nation    String  @db.VarChar(45)
-  user_id   String
-  user      User    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_location_user1")
-
-  @@index([user_id], map: "fk_location_user1_idx")
-}
-
 model session {
   id                        Int                     @id
   create_time               DateTime                @default(now()) @db.Timestamp(6)
@@ -174,6 +143,16 @@ model Tree {
   @@index([user_id])
 }
 
+model Job {
+  id      String @id
+  data    String
+  status  String
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  @@index([user_id, data])
+}
+
 model User {
   id                            String             @id @default(uuid())
   username                      String             @db.VarChar(16)
@@ -193,12 +172,33 @@ model User {
   Job                           Job[]
 }
 
-model Job {
-  id      String @id
-  data    String
-  status  String
-  user_id String
-  user    User   @relation(fields: [user_id], references: [id])
+model location {
+  id        Int     @id
+  latitude  Decimal @db.Decimal
+  longitude Decimal @db.Decimal
+  city      String  @db.VarChar(45)
+  state     String  @db.Char(2)
+  nation    String  @db.VarChar(45)
+  user_id   String
+  user      User    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_location_user1")
 
-  @@index([user_id, data])
+  @@index([user_id], map: "fk_location_user1_idx")
+}
+
+model friend {
+  user_id                     String
+  friend_id                   String
+  user_friend_user_idTouser   User   @relation("friend_user_idTouser", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_friends_user1")
+  user_friend_friend_idTouser User   @relation("friend_friend_idTouser", fields: [friend_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_friends_user2")
+
+  @@id([user_id, friend_id])
+  @@index([user_id], map: "fk_friends_user1_idx")
+  @@index([friend_id], map: "fk_friends_user2_idx")
+}
+
+model achievement {
+  id               Int                @id
+  name             String             @unique(map: "name_unique") @db.VarChar(45)
+  description      String             @unique(map: "description_unique") @db.VarChar(45)
+  achievement_user achievement_user[]
 }
