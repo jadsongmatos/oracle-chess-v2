@@ -1,0 +1,1766 @@
+﻿[
+    {
+        "ISO": "AD",
+        "ISO3": "AND",
+        "ISO-Numeric": "20",
+        "Country": "Andorra",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "AE",
+        "ISO3": "ARE",
+        "ISO-Numeric": "784",
+        "Country": "United Arab Emirates",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "AF",
+        "ISO3": "AFG",
+        "ISO-Numeric": "4",
+        "Country": "Afghanistan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "AG",
+        "ISO3": "ATG",
+        "ISO-Numeric": "28",
+        "Country": "Antigua and Barbuda",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "AI",
+        "ISO3": "AIA",
+        "ISO-Numeric": "660",
+        "Country": "Anguilla",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "AL",
+        "ISO3": "ALB",
+        "ISO-Numeric": "8",
+        "Country": "Albania",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "AM",
+        "ISO3": "ARM",
+        "ISO-Numeric": "51",
+        "Country": "Armenia",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "AO",
+        "ISO3": "AGO",
+        "ISO-Numeric": "24",
+        "Country": "Angola",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "AQ",
+        "ISO3": "ATA",
+        "ISO-Numeric": "10",
+        "Country": "Antarctica",
+        "Continent": "AN"
+    },
+    {
+        "ISO": "AR",
+        "ISO3": "ARG",
+        "ISO-Numeric": "32",
+        "Country": "Argentina",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "AS",
+        "ISO3": "ASM",
+        "ISO-Numeric": "16",
+        "Country": "American Samoa",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "AT",
+        "ISO3": "AUT",
+        "ISO-Numeric": "40",
+        "Country": "Austria",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "AU",
+        "ISO3": "AUS",
+        "ISO-Numeric": "36",
+        "Country": "Australia",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "AW",
+        "ISO3": "ABW",
+        "ISO-Numeric": "533",
+        "Country": "Aruba",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "AX",
+        "ISO3": "ALA",
+        "ISO-Numeric": "248",
+        "Country": "Aland Islands",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "AZ",
+        "ISO3": "AZE",
+        "ISO-Numeric": "31",
+        "Country": "Azerbaijan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "BA",
+        "ISO3": "BIH",
+        "ISO-Numeric": "70",
+        "Country": "Bosnia and Herzegovina",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "BB",
+        "ISO3": "BRB",
+        "ISO-Numeric": "52",
+        "Country": "Barbados",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "BD",
+        "ISO3": "BGD",
+        "ISO-Numeric": "50",
+        "Country": "Bangladesh",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "BE",
+        "ISO3": "BEL",
+        "ISO-Numeric": "56",
+        "Country": "Belgium",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "BF",
+        "ISO3": "BFA",
+        "ISO-Numeric": "854",
+        "Country": "Burkina Faso",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "BG",
+        "ISO3": "BGR",
+        "ISO-Numeric": "100",
+        "Country": "Bulgaria",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "BH",
+        "ISO3": "BHR",
+        "ISO-Numeric": "48",
+        "Country": "Bahrain",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "BI",
+        "ISO3": "BDI",
+        "ISO-Numeric": "108",
+        "Country": "Burundi",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "BJ",
+        "ISO3": "BEN",
+        "ISO-Numeric": "204",
+        "Country": "Benin",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "BL",
+        "ISO3": "BLM",
+        "ISO-Numeric": "652",
+        "Country": "Saint Barthelemy",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "BM",
+        "ISO3": "BMU",
+        "ISO-Numeric": "60",
+        "Country": "Bermuda",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "BN",
+        "ISO3": "BRN",
+        "ISO-Numeric": "96",
+        "Country": "Brunei",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "BO",
+        "ISO3": "BOL",
+        "ISO-Numeric": "68",
+        "Country": "Bolivia",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "BQ",
+        "ISO3": "BES",
+        "ISO-Numeric": "535",
+        "Country": "Bonaire, Saint Eustatius and Saba ",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "BR",
+        "ISO3": "BRA",
+        "ISO-Numeric": "76",
+        "Country": "Brazil",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "BS",
+        "ISO3": "BHS",
+        "ISO-Numeric": "44",
+        "Country": "Bahamas",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "BT",
+        "ISO3": "BTN",
+        "ISO-Numeric": "64",
+        "Country": "Bhutan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "BV",
+        "ISO3": "BVT",
+        "ISO-Numeric": "74",
+        "Country": "Bouvet Island",
+        "Continent": "AN"
+    },
+    {
+        "ISO": "BW",
+        "ISO3": "BWA",
+        "ISO-Numeric": "72",
+        "Country": "Botswana",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "BY",
+        "ISO3": "BLR",
+        "ISO-Numeric": "112",
+        "Country": "Belarus",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "BZ",
+        "ISO3": "BLZ",
+        "ISO-Numeric": "84",
+        "Country": "Belize",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "CA",
+        "ISO3": "CAN",
+        "ISO-Numeric": "124",
+        "Country": "Canada",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "CC",
+        "ISO3": "CCK",
+        "ISO-Numeric": "166",
+        "Country": "Cocos Islands",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "CD",
+        "ISO3": "COD",
+        "ISO-Numeric": "180",
+        "Country": "Democratic Republic of the Congo",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "CF",
+        "ISO3": "CAF",
+        "ISO-Numeric": "140",
+        "Country": "Central African Republic",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "CG",
+        "ISO3": "COG",
+        "ISO-Numeric": "178",
+        "Country": "Republic of the Congo",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "CH",
+        "ISO3": "CHE",
+        "ISO-Numeric": "756",
+        "Country": "Switzerland",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "CI",
+        "ISO3": "CIV",
+        "ISO-Numeric": "384",
+        "Country": "Ivory Coast",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "CK",
+        "ISO3": "COK",
+        "ISO-Numeric": "184",
+        "Country": "Cook Islands",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "CL",
+        "ISO3": "CHL",
+        "ISO-Numeric": "152",
+        "Country": "Chile",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "CM",
+        "ISO3": "CMR",
+        "ISO-Numeric": "120",
+        "Country": "Cameroon",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "CN",
+        "ISO3": "CHN",
+        "ISO-Numeric": "156",
+        "Country": "China",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "CO",
+        "ISO3": "COL",
+        "ISO-Numeric": "170",
+        "Country": "Colombia",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "CR",
+        "ISO3": "CRI",
+        "ISO-Numeric": "188",
+        "Country": "Costa Rica",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "CU",
+        "ISO3": "CUB",
+        "ISO-Numeric": "192",
+        "Country": "Cuba",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "CV",
+        "ISO3": "CPV",
+        "ISO-Numeric": "132",
+        "Country": "Cabo Verde",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "CW",
+        "ISO3": "CUW",
+        "ISO-Numeric": "531",
+        "Country": "Curacao",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "CX",
+        "ISO3": "CXR",
+        "ISO-Numeric": "162",
+        "Country": "Christmas Island",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "CY",
+        "ISO3": "CYP",
+        "ISO-Numeric": "196",
+        "Country": "Cyprus",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "CZ",
+        "ISO3": "CZE",
+        "ISO-Numeric": "203",
+        "Country": "Czechia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "DE",
+        "ISO3": "DEU",
+        "ISO-Numeric": "276",
+        "Country": "Germany",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "DJ",
+        "ISO3": "DJI",
+        "ISO-Numeric": "262",
+        "Country": "Djibouti",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "DK",
+        "ISO3": "DNK",
+        "ISO-Numeric": "208",
+        "Country": "Denmark",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "DM",
+        "ISO3": "DMA",
+        "ISO-Numeric": "212",
+        "Country": "Dominica",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "DO",
+        "ISO3": "DOM",
+        "ISO-Numeric": "214",
+        "Country": "Dominican Republic",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "DZ",
+        "ISO3": "DZA",
+        "ISO-Numeric": "12",
+        "Country": "Algeria",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "EC",
+        "ISO3": "ECU",
+        "ISO-Numeric": "218",
+        "Country": "Ecuador",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "EE",
+        "ISO3": "EST",
+        "ISO-Numeric": "233",
+        "Country": "Estonia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "EG",
+        "ISO3": "EGY",
+        "ISO-Numeric": "818",
+        "Country": "Egypt",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "EH",
+        "ISO3": "ESH",
+        "ISO-Numeric": "732",
+        "Country": "Western Sahara",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "ER",
+        "ISO3": "ERI",
+        "ISO-Numeric": "232",
+        "Country": "Eritrea",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "ES",
+        "ISO3": "ESP",
+        "ISO-Numeric": "724",
+        "Country": "Spain",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "ET",
+        "ISO3": "ETH",
+        "ISO-Numeric": "231",
+        "Country": "Ethiopia",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "FI",
+        "ISO3": "FIN",
+        "ISO-Numeric": "246",
+        "Country": "Finland",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "FJ",
+        "ISO3": "FJI",
+        "ISO-Numeric": "242",
+        "Country": "Fiji",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "FK",
+        "ISO3": "FLK",
+        "ISO-Numeric": "238",
+        "Country": "Falkland Islands",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "FM",
+        "ISO3": "FSM",
+        "ISO-Numeric": "583",
+        "Country": "Micronesia",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "FO",
+        "ISO3": "FRO",
+        "ISO-Numeric": "234",
+        "Country": "Faroe Islands",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "FR",
+        "ISO3": "FRA",
+        "ISO-Numeric": "250",
+        "Country": "France",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "GA",
+        "ISO3": "GAB",
+        "ISO-Numeric": "266",
+        "Country": "Gabon",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "GB",
+        "ISO3": "GBR",
+        "ISO-Numeric": "826",
+        "Country": "United Kingdom",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "GD",
+        "ISO3": "GRD",
+        "ISO-Numeric": "308",
+        "Country": "Grenada",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "GE",
+        "ISO3": "GEO",
+        "ISO-Numeric": "268",
+        "Country": "Georgia",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "GF",
+        "ISO3": "GUF",
+        "ISO-Numeric": "254",
+        "Country": "French Guiana",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "GG",
+        "ISO3": "GGY",
+        "ISO-Numeric": "831",
+        "Country": "Guernsey",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "GH",
+        "ISO3": "GHA",
+        "ISO-Numeric": "288",
+        "Country": "Ghana",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "GI",
+        "ISO3": "GIB",
+        "ISO-Numeric": "292",
+        "Country": "Gibraltar",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "GL",
+        "ISO3": "GRL",
+        "ISO-Numeric": "304",
+        "Country": "Greenland",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "GM",
+        "ISO3": "GMB",
+        "ISO-Numeric": "270",
+        "Country": "Gambia",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "GN",
+        "ISO3": "GIN",
+        "ISO-Numeric": "324",
+        "Country": "Guinea",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "GP",
+        "ISO3": "GLP",
+        "ISO-Numeric": "312",
+        "Country": "Guadeloupe",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "GQ",
+        "ISO3": "GNQ",
+        "ISO-Numeric": "226",
+        "Country": "Equatorial Guinea",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "GR",
+        "ISO3": "GRC",
+        "ISO-Numeric": "300",
+        "Country": "Greece",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "GS",
+        "ISO3": "SGS",
+        "ISO-Numeric": "239",
+        "Country": "South Georgia and the South Sandwich Islands",
+        "Continent": "AN"
+    },
+    {
+        "ISO": "GT",
+        "ISO3": "GTM",
+        "ISO-Numeric": "320",
+        "Country": "Guatemala",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "GU",
+        "ISO3": "GUM",
+        "ISO-Numeric": "316",
+        "Country": "Guam",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "GW",
+        "ISO3": "GNB",
+        "ISO-Numeric": "624",
+        "Country": "Guinea-Bissau",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "GY",
+        "ISO3": "GUY",
+        "ISO-Numeric": "328",
+        "Country": "Guyana",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "HK",
+        "ISO3": "HKG",
+        "ISO-Numeric": "344",
+        "Country": "Hong Kong",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "HM",
+        "ISO3": "HMD",
+        "ISO-Numeric": "334",
+        "Country": "Heard Island and McDonald Islands",
+        "Continent": "AN"
+    },
+    {
+        "ISO": "HN",
+        "ISO3": "HND",
+        "ISO-Numeric": "340",
+        "Country": "Honduras",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "HR",
+        "ISO3": "HRV",
+        "ISO-Numeric": "191",
+        "Country": "Croatia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "HT",
+        "ISO3": "HTI",
+        "ISO-Numeric": "332",
+        "Country": "Haiti",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "HU",
+        "ISO3": "HUN",
+        "ISO-Numeric": "348",
+        "Country": "Hungary",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "\"ID\"",
+        "ISO3": "IDN",
+        "ISO-Numeric": "360",
+        "Country": "Indonesia",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "IE",
+        "ISO3": "IRL",
+        "ISO-Numeric": "372",
+        "Country": "Ireland",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "IL",
+        "ISO3": "ISR",
+        "ISO-Numeric": "376",
+        "Country": "Israel",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "IM",
+        "ISO3": "IMN",
+        "ISO-Numeric": "833",
+        "Country": "Isle of Man",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "IN",
+        "ISO3": "IND",
+        "ISO-Numeric": "356",
+        "Country": "India",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "IO",
+        "ISO3": "IOT",
+        "ISO-Numeric": "86",
+        "Country": "British Indian Ocean Territory",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "IQ",
+        "ISO3": "IRQ",
+        "ISO-Numeric": "368",
+        "Country": "Iraq",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "IR",
+        "ISO3": "IRN",
+        "ISO-Numeric": "364",
+        "Country": "Iran",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "IS",
+        "ISO3": "ISL",
+        "ISO-Numeric": "352",
+        "Country": "Iceland",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "IT",
+        "ISO3": "ITA",
+        "ISO-Numeric": "380",
+        "Country": "Italy",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "JE",
+        "ISO3": "JEY",
+        "ISO-Numeric": "832",
+        "Country": "Jersey",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "JM",
+        "ISO3": "JAM",
+        "ISO-Numeric": "388",
+        "Country": "Jamaica",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "JO",
+        "ISO3": "JOR",
+        "ISO-Numeric": "400",
+        "Country": "Jordan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "JP",
+        "ISO3": "JPN",
+        "ISO-Numeric": "392",
+        "Country": "Japan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "KE",
+        "ISO3": "KEN",
+        "ISO-Numeric": "404",
+        "Country": "Kenya",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "KG",
+        "ISO3": "KGZ",
+        "ISO-Numeric": "417",
+        "Country": "Kyrgyzstan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "KH",
+        "ISO3": "KHM",
+        "ISO-Numeric": "116",
+        "Country": "Cambodia",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "KI",
+        "ISO3": "KIR",
+        "ISO-Numeric": "296",
+        "Country": "Kiribati",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "KM",
+        "ISO3": "COM",
+        "ISO-Numeric": "174",
+        "Country": "Comoros",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "KN",
+        "ISO3": "KNA",
+        "ISO-Numeric": "659",
+        "Country": "Saint Kitts and Nevis",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "KP",
+        "ISO3": "PRK",
+        "ISO-Numeric": "408",
+        "Country": "North Korea",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "KR",
+        "ISO3": "KOR",
+        "ISO-Numeric": "410",
+        "Country": "South Korea",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "XK",
+        "ISO3": "XKX",
+        "ISO-Numeric": "0",
+        "Country": "Kosovo",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "KW",
+        "ISO3": "KWT",
+        "ISO-Numeric": "414",
+        "Country": "Kuwait",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "KY",
+        "ISO3": "CYM",
+        "ISO-Numeric": "136",
+        "Country": "Cayman Islands",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "KZ",
+        "ISO3": "KAZ",
+        "ISO-Numeric": "398",
+        "Country": "Kazakhstan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "LA",
+        "ISO3": "LAO",
+        "ISO-Numeric": "418",
+        "Country": "Laos",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "LB",
+        "ISO3": "LBN",
+        "ISO-Numeric": "422",
+        "Country": "Lebanon",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "LC",
+        "ISO3": "LCA",
+        "ISO-Numeric": "662",
+        "Country": "Saint Lucia",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "LI",
+        "ISO3": "LIE",
+        "ISO-Numeric": "438",
+        "Country": "Liechtenstein",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "LK",
+        "ISO3": "LKA",
+        "ISO-Numeric": "144",
+        "Country": "Sri Lanka",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "LR",
+        "ISO3": "LBR",
+        "ISO-Numeric": "430",
+        "Country": "Liberia",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "LS",
+        "ISO3": "LSO",
+        "ISO-Numeric": "426",
+        "Country": "Lesotho",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "LT",
+        "ISO3": "LTU",
+        "ISO-Numeric": "440",
+        "Country": "Lithuania",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "LU",
+        "ISO3": "LUX",
+        "ISO-Numeric": "442",
+        "Country": "Luxembourg",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "LV",
+        "ISO3": "LVA",
+        "ISO-Numeric": "428",
+        "Country": "Latvia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "LY",
+        "ISO3": "LBY",
+        "ISO-Numeric": "434",
+        "Country": "Libya",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "MA",
+        "ISO3": "MAR",
+        "ISO-Numeric": "504",
+        "Country": "Morocco",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "MC",
+        "ISO3": "MCO",
+        "ISO-Numeric": "492",
+        "Country": "Monaco",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "MD",
+        "ISO3": "MDA",
+        "ISO-Numeric": "498",
+        "Country": "Moldova",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "ME",
+        "ISO3": "MNE",
+        "ISO-Numeric": "499",
+        "Country": "Montenegro",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "MF",
+        "ISO3": "MAF",
+        "ISO-Numeric": "663",
+        "Country": "Saint Martin",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "MG",
+        "ISO3": "MDG",
+        "ISO-Numeric": "450",
+        "Country": "Madagascar",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "MH",
+        "ISO3": "MHL",
+        "ISO-Numeric": "584",
+        "Country": "Marshall Islands",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "MK",
+        "ISO3": "MKD",
+        "ISO-Numeric": "807",
+        "Country": "North Macedonia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "ML",
+        "ISO3": "MLI",
+        "ISO-Numeric": "466",
+        "Country": "Mali",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "MM",
+        "ISO3": "MMR",
+        "ISO-Numeric": "104",
+        "Country": "Myanmar",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "MN",
+        "ISO3": "MNG",
+        "ISO-Numeric": "496",
+        "Country": "Mongolia",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "MO",
+        "ISO3": "MAC",
+        "ISO-Numeric": "446",
+        "Country": "Macao",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "MP",
+        "ISO3": "MNP",
+        "ISO-Numeric": "580",
+        "Country": "Northern Mariana Islands",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "MQ",
+        "ISO3": "MTQ",
+        "ISO-Numeric": "474",
+        "Country": "Martinique",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "MR",
+        "ISO3": "MRT",
+        "ISO-Numeric": "478",
+        "Country": "Mauritania",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "MS",
+        "ISO3": "MSR",
+        "ISO-Numeric": "500",
+        "Country": "Montserrat",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "MT",
+        "ISO3": "MLT",
+        "ISO-Numeric": "470",
+        "Country": "Malta",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "MU",
+        "ISO3": "MUS",
+        "ISO-Numeric": "480",
+        "Country": "Mauritius",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "MV",
+        "ISO3": "MDV",
+        "ISO-Numeric": "462",
+        "Country": "Maldives",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "MW",
+        "ISO3": "MWI",
+        "ISO-Numeric": "454",
+        "Country": "Malawi",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "MX",
+        "ISO3": "MEX",
+        "ISO-Numeric": "484",
+        "Country": "Mexico",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "MY",
+        "ISO3": "MYS",
+        "ISO-Numeric": "458",
+        "Country": "Malaysia",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "MZ",
+        "ISO3": "MOZ",
+        "ISO-Numeric": "508",
+        "Country": "Mozambique",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "NA",
+        "ISO3": "NAM",
+        "ISO-Numeric": "516",
+        "Country": "Namibia",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "NC",
+        "ISO3": "NCL",
+        "ISO-Numeric": "540",
+        "Country": "New Caledonia",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "NE",
+        "ISO3": "NER",
+        "ISO-Numeric": "562",
+        "Country": "Niger",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "NF",
+        "ISO3": "NFK",
+        "ISO-Numeric": "574",
+        "Country": "Norfolk Island",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "NG",
+        "ISO3": "NGA",
+        "ISO-Numeric": "566",
+        "Country": "Nigeria",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "NI",
+        "ISO3": "NIC",
+        "ISO-Numeric": "558",
+        "Country": "Nicaragua",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "NL",
+        "ISO3": "NLD",
+        "ISO-Numeric": "528",
+        "Country": "Netherlands",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "NO",
+        "ISO3": "NOR",
+        "ISO-Numeric": "578",
+        "Country": "Norway",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "NP",
+        "ISO3": "NPL",
+        "ISO-Numeric": "524",
+        "Country": "Nepal",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "NR",
+        "ISO3": "NRU",
+        "ISO-Numeric": "520",
+        "Country": "Nauru",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "NU",
+        "ISO3": "NIU",
+        "ISO-Numeric": "570",
+        "Country": "Niue",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "NZ",
+        "ISO3": "NZL",
+        "ISO-Numeric": "554",
+        "Country": "New Zealand",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "OM",
+        "ISO3": "OMN",
+        "ISO-Numeric": "512",
+        "Country": "Oman",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "PA",
+        "ISO3": "PAN",
+        "ISO-Numeric": "591",
+        "Country": "Panama",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "PE",
+        "ISO3": "PER",
+        "ISO-Numeric": "604",
+        "Country": "Peru",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "PF",
+        "ISO3": "PYF",
+        "ISO-Numeric": "258",
+        "Country": "French Polynesia",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "PG",
+        "ISO3": "PNG",
+        "ISO-Numeric": "598",
+        "Country": "Papua New Guinea",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "PH",
+        "ISO3": "PHL",
+        "ISO-Numeric": "608",
+        "Country": "Philippines",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "PK",
+        "ISO3": "PAK",
+        "ISO-Numeric": "586",
+        "Country": "Pakistan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "PL",
+        "ISO3": "POL",
+        "ISO-Numeric": "616",
+        "Country": "Poland",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "PM",
+        "ISO3": "SPM",
+        "ISO-Numeric": "666",
+        "Country": "Saint Pierre and Miquelon",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "PN",
+        "ISO3": "PCN",
+        "ISO-Numeric": "612",
+        "Country": "Pitcairn",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "PR",
+        "ISO3": "PRI",
+        "ISO-Numeric": "630",
+        "Country": "Puerto Rico",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "PS",
+        "ISO3": "PSE",
+        "ISO-Numeric": "275",
+        "Country": "Palestinian Territory",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "PT",
+        "ISO3": "PRT",
+        "ISO-Numeric": "620",
+        "Country": "Portugal",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "PW",
+        "ISO3": "PLW",
+        "ISO-Numeric": "585",
+        "Country": "Palau",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "PY",
+        "ISO3": "PRY",
+        "ISO-Numeric": "600",
+        "Country": "Paraguay",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "QA",
+        "ISO3": "QAT",
+        "ISO-Numeric": "634",
+        "Country": "Qatar",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "RE",
+        "ISO3": "REU",
+        "ISO-Numeric": "638",
+        "Country": "Reunion",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "RO",
+        "ISO3": "ROU",
+        "ISO-Numeric": "642",
+        "Country": "Romania",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "RS",
+        "ISO3": "SRB",
+        "ISO-Numeric": "688",
+        "Country": "Serbia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "RU",
+        "ISO3": "RUS",
+        "ISO-Numeric": "643",
+        "Country": "Russia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "RW",
+        "ISO3": "RWA",
+        "ISO-Numeric": "646",
+        "Country": "Rwanda",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SA",
+        "ISO3": "SAU",
+        "ISO-Numeric": "682",
+        "Country": "Saudi Arabia",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "SB",
+        "ISO3": "SLB",
+        "ISO-Numeric": "90",
+        "Country": "Solomon Islands",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "SC",
+        "ISO3": "SYC",
+        "ISO-Numeric": "690",
+        "Country": "Seychelles",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SD",
+        "ISO3": "SDN",
+        "ISO-Numeric": "729",
+        "Country": "Sudan",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SS",
+        "ISO3": "SSD",
+        "ISO-Numeric": "728",
+        "Country": "South Sudan",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SE",
+        "ISO3": "SWE",
+        "ISO-Numeric": "752",
+        "Country": "Sweden",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "SG",
+        "ISO3": "SGP",
+        "ISO-Numeric": "702",
+        "Country": "Singapore",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "SH",
+        "ISO3": "SHN",
+        "ISO-Numeric": "654",
+        "Country": "Saint Helena",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SI",
+        "ISO3": "SVN",
+        "ISO-Numeric": "705",
+        "Country": "Slovenia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "SJ",
+        "ISO3": "SJM",
+        "ISO-Numeric": "744",
+        "Country": "Svalbard and Jan Mayen",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "SK",
+        "ISO3": "SVK",
+        "ISO-Numeric": "703",
+        "Country": "Slovakia",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "SL",
+        "ISO3": "SLE",
+        "ISO-Numeric": "694",
+        "Country": "Sierra Leone",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SM",
+        "ISO3": "SMR",
+        "ISO-Numeric": "674",
+        "Country": "San Marino",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "SN",
+        "ISO3": "SEN",
+        "ISO-Numeric": "686",
+        "Country": "Senegal",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SO",
+        "ISO3": "SOM",
+        "ISO-Numeric": "706",
+        "Country": "Somalia",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SR",
+        "ISO3": "SUR",
+        "ISO-Numeric": "740",
+        "Country": "Suriname",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "ST",
+        "ISO3": "STP",
+        "ISO-Numeric": "678",
+        "Country": "Sao Tome and Principe",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "SV",
+        "ISO3": "SLV",
+        "ISO-Numeric": "222",
+        "Country": "El Salvador",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "SX",
+        "ISO3": "SXM",
+        "ISO-Numeric": "534",
+        "Country": "Sint Maarten",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "SY",
+        "ISO3": "SYR",
+        "ISO-Numeric": "760",
+        "Country": "Syria",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "SZ",
+        "ISO3": "SWZ",
+        "ISO-Numeric": "748",
+        "Country": "Eswatini",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "TC",
+        "ISO3": "TCA",
+        "ISO-Numeric": "796",
+        "Country": "Turks and Caicos Islands",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "TD",
+        "ISO3": "TCD",
+        "ISO-Numeric": "148",
+        "Country": "Chad",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "TF",
+        "ISO3": "ATF",
+        "ISO-Numeric": "260",
+        "Country": "French Southern Territories",
+        "Continent": "AN"
+    },
+    {
+        "ISO": "TG",
+        "ISO3": "TGO",
+        "ISO-Numeric": "768",
+        "Country": "Togo",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "TH",
+        "ISO3": "THA",
+        "ISO-Numeric": "764",
+        "Country": "Thailand",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "TJ",
+        "ISO3": "TJK",
+        "ISO-Numeric": "762",
+        "Country": "Tajikistan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "TK",
+        "ISO3": "TKL",
+        "ISO-Numeric": "772",
+        "Country": "Tokelau",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "TL",
+        "ISO3": "TLS",
+        "ISO-Numeric": "626",
+        "Country": "Timor Leste",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "TM",
+        "ISO3": "TKM",
+        "ISO-Numeric": "795",
+        "Country": "Turkmenistan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "TN",
+        "ISO3": "TUN",
+        "ISO-Numeric": "788",
+        "Country": "Tunisia",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "TO",
+        "ISO3": "TON",
+        "ISO-Numeric": "776",
+        "Country": "Tonga",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "TR",
+        "ISO3": "TUR",
+        "ISO-Numeric": "792",
+        "Country": "Turkey",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "TT",
+        "ISO3": "TTO",
+        "ISO-Numeric": "780",
+        "Country": "Trinidad and Tobago",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "TV",
+        "ISO3": "TUV",
+        "ISO-Numeric": "798",
+        "Country": "Tuvalu",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "TW",
+        "ISO3": "TWN",
+        "ISO-Numeric": "158",
+        "Country": "Taiwan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "TZ",
+        "ISO3": "TZA",
+        "ISO-Numeric": "834",
+        "Country": "Tanzania",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "UA",
+        "ISO3": "UKR",
+        "ISO-Numeric": "804",
+        "Country": "Ukraine",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "UG",
+        "ISO3": "UGA",
+        "ISO-Numeric": "800",
+        "Country": "Uganda",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "UM",
+        "ISO3": "UMI",
+        "ISO-Numeric": "581",
+        "Country": "United States Minor Outlying Islands",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "US",
+        "ISO3": "USA",
+        "ISO-Numeric": "840",
+        "Country": "United States",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "UY",
+        "ISO3": "URY",
+        "ISO-Numeric": "858",
+        "Country": "Uruguay",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "UZ",
+        "ISO3": "UZB",
+        "ISO-Numeric": "860",
+        "Country": "Uzbekistan",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "VA",
+        "ISO3": "VAT",
+        "ISO-Numeric": "336",
+        "Country": "Vatican",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "VC",
+        "ISO3": "VCT",
+        "ISO-Numeric": "670",
+        "Country": "Saint Vincent and the Grenadines",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "VE",
+        "ISO3": "VEN",
+        "ISO-Numeric": "862",
+        "Country": "Venezuela",
+        "Continent": "SA"
+    },
+    {
+        "ISO": "VG",
+        "ISO3": "VGB",
+        "ISO-Numeric": "92",
+        "Country": "British Virgin Islands",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "VI",
+        "ISO3": "VIR",
+        "ISO-Numeric": "850",
+        "Country": "U.S. Virgin Islands",
+        "Continent": "NA"
+    },
+    {
+        "ISO": "VN",
+        "ISO3": "VNM",
+        "ISO-Numeric": "704",
+        "Country": "Vietnam",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "VU",
+        "ISO3": "VUT",
+        "ISO-Numeric": "548",
+        "Country": "Vanuatu",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "WF",
+        "ISO3": "WLF",
+        "ISO-Numeric": "876",
+        "Country": "Wallis and Futuna",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "WS",
+        "ISO3": "WSM",
+        "ISO-Numeric": "882",
+        "Country": "Samoa",
+        "Continent": "OC"
+    },
+    {
+        "ISO": "YE",
+        "ISO3": "YEM",
+        "ISO-Numeric": "887",
+        "Country": "Yemen",
+        "Continent": "AS"
+    },
+    {
+        "ISO": "YT",
+        "ISO3": "MYT",
+        "ISO-Numeric": "175",
+        "Country": "Mayotte",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "ZA",
+        "ISO3": "ZAF",
+        "ISO-Numeric": "710",
+        "Country": "South Africa",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "ZM",
+        "ISO3": "ZMB",
+        "ISO-Numeric": "894",
+        "Country": "Zambia",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "ZW",
+        "ISO3": "ZWE",
+        "ISO-Numeric": "716",
+        "Country": "Zimbabwe",
+        "Continent": "AF"
+    },
+    {
+        "ISO": "CS",
+        "ISO3": "SCG",
+        "ISO-Numeric": "891",
+        "Country": "Serbia and Montenegro",
+        "Continent": "EU"
+    },
+    {
+        "ISO": "AN",
+        "ISO3": "ANT",
+        "ISO-Numeric": "530",
+        "Country": "Netherlands Antilles",
+        "Continent": "NA"
+    }
+]
