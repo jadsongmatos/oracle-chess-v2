@@ -8,18 +8,6 @@ import { useQuery } from "react-query";
 import Header from "@/components/header";
 import Select from "@/components/select";
 
-async function fetchPosts() {
-  const res = await fetch(
-    "https://www.geonames.org/servlet/geonames?&srv=163&country=BR&featureCode=ADM1&lang=en&type=json"
-  );
-  if (!res.ok) {
-    throw new Error("Network response was not ok");
-  }
-  const uf_city = await res.json();
-  console.log("uf_city", uf_city);
-  return uf_city;
-}
-
 export default function ProfileEdit() {
   const {
     register,
@@ -32,12 +20,18 @@ export default function ProfileEdit() {
   const [options_city, set_options_city] = useState([]);
   const [select_city, set_select_city] = useState(null);
 
-  const { uf_city, err_uf_city, isLoading }: any = useQuery(
-    "posts",
-    fetchPosts
-  );
 
-  const uf: any = []; // Populate your 'uf' array
+
+  const uf = useQuery({
+    queryKey: ['repoData'],
+    queryFn: () =>
+      fetch("https://www.geonames.org/servlet/geonames?&srv=163&country=BR&featureCode=ADM1&lang=en&type=json").then(
+        (res) => res.json(),
+      ),
+  })
+
+  console.log("data", uf.data);
+
 
   const onSubmit = (data: any) => console.log(data);
 
@@ -73,14 +67,17 @@ export default function ProfileEdit() {
               )}
             </div>
             <div className="d-flex mb-3 justify-content-center">
-              {isLoading ? (
+              {uf.isLoading ? (
                 <div>Loading...</div>
               ) : (
                 <>
-                  {err_uf_city ? (
-                    <div>An error has occurred: {err_uf_city?.message}</div>
+                  {uf.error ? (
+                    <div>An error has occurred: {JSON.stringify(uf.error)}</div>
                   ) : (
-                    <>{JSON.stringify(uf_city)}</>
+                    uf.data.geonames.map((e:any) => {
+                      return <>{JSON.stringify(e)}</>
+                    })
+                    
                   )}
                 </>
               )}
