@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 
 import { useForm, Controller } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 
 import Header from "@/components/header";
 import Select from "@/components/select";
@@ -75,6 +75,7 @@ const fetchDataCity = async (input: any) => {
 };
 
 export default function ProfileEdit(props: any) {
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -85,7 +86,31 @@ export default function ProfileEdit(props: any) {
   const [select_uf, set_select_uf] = useState(null);
   const [select_city, set_select_city] = useState(null);
 
-  const counry_options = useMutation(fetchDataUf);
+  const movieQuery = useQuery({
+    queryKey: ["uf_data"],
+    queryFn: () => fetchDataUf,
+  });
+
+  const counry_options = useMutation({
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ["uf_data"] });
+      const previousData = queryClient.getQueryData(["uf_data"]);
+      console.log("previousData", previousData);
+      /*
+      // remove local state so that server state is taken instead
+      setComment(undefined)
+
+      queryClient.setQueryData(movieKeys.detail(movieId), {
+        ...previousData,
+        movie: {
+          ...previousData.movie,
+          comment,
+        },
+      })
+
+      return { previousData }*/
+    },
+  });
 
   const uf_options = useMutation(fetchDataCity);
 
@@ -133,9 +158,10 @@ export default function ProfileEdit(props: any) {
                     options={props.countries}
                     onChange={(e: any) => {
                       set_select_counry(e);
-                      counry_options.mutate({
+                      console.log("movieQuery",movieQuery)
+                      /*counry_options.mutate({
                         counry: e,
-                      });
+                      });*/
                       field.onChange(e); // make sure to keep this to update form state
                     }}
                     value={select_counry}
