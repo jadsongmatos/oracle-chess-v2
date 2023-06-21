@@ -3,13 +3,19 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.0.4" use-changelog="false" last-position="0,571" last-zoom="0.85" max-obj-count="24"
+<dbmodel pgmodeler-ver="1.0.4" use-changelog="false" last-position="352,0" last-zoom="0.75" max-obj-count="24"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
 	 layer-name-colors="#000000"
 	 layer-rect-colors="#b4b4b4"
 	 show-layer-names="false" show-layer-rects="false">
+<role name="pg_database_owner"
+ inherit="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
 <database name="chess" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
 	<role name="postgres"/>
 	<tablespace name="pg_default"/>
@@ -21,7 +27,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="achievement" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="2420" y="320"/>
+	<position x="60" y="60"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -39,7 +45,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="achievement_user" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1660" y="340"/>
+	<position x="440" y="60"/>
 	<column name="achievement_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -54,7 +60,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="activity" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="2180" y="860"/>
+	<position x="4260" y="300"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -69,7 +75,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="buy" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="800" y="440"/>
+	<position x="780" y="540"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -99,7 +105,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="buy_coin" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="20" y="340"/>
+	<position x="60" y="560"/>
 	<column name="buy_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -114,7 +120,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="click" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="2200" y="540"/>
+	<position x="60" y="300"/>
 	<column name="idclick" not-null="true">
 		<type name="character varying" length="255"/>
 	</column>
@@ -135,7 +141,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="coin" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="660" y="800"/>
+	<position x="580" y="900"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -156,7 +162,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="friend" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="800" y="1460"/>
+	<position x="980" y="100"/>
 	<column name="user_id" not-null="true">
 		<type name="text" length="0"/>
 	</column>
@@ -171,7 +177,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="interaction" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="2720" y="840"/>
+	<position x="3700" y="260"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -189,7 +195,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="interaction_session" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="2280" y="1100"/>
+	<position x="3040" y="460"/>
 	<column name="interaction_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -204,7 +210,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="item" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="100" y="820"/>
+	<position x="80" y="800"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -228,7 +234,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="link" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1700" y="620"/>
+	<position x="540" y="300"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -249,7 +255,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="location" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1720" y="1280"/>
+	<position x="1100" y="820"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -279,7 +285,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="session" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1700" y="940"/>
+	<position x="2440" y="360"/>
 	<column name="id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -296,6 +302,89 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="text" length="0"/>
 	</column>
 	<constraint name="session_pkey" type="pk-constr" table="public.session">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="Tree_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="Tree" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2360" y="740"/>
+	<column name="id" not-null="true" sequence="public.&quot;Tree_id_seq&quot;">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="move" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="previousMoveId">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="gameover" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="checkmate" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="updateTime" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0" precision="3"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="Tree_pkey" type="pk-constr" table="public.&quot;Tree&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="User" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1880" y="360"/>
+	<column name="id" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="character varying" length="16"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="create_time" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0" precision="3"/>
+	</column>
+	<column name="update_time" not-null="true">
+		<type name="timestamp" length="0" precision="3"/>
+	</column>
+	<constraint name="User_pkey" type="pk-constr" table="public.&quot;User&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Job" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2320" y="100"/>
+	<column name="id" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="data" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="status" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="user_id" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="Job_pkey" type="pk-constr" table="public.&quot;Job&quot;">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -452,81 +541,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		</idxelement>
 </index>
 
-<table name="Tree" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="760" y="1140"/>
-	<column name="value" not-null="true">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="parent" not-null="true">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="gameover" not-null="true" default-value="false">
-		<type name="boolean" length="0"/>
-	</column>
-	<column name="checkmate" not-null="true" default-value="false">
-		<type name="boolean" length="0"/>
-	</column>
-	<column name="updateTime" not-null="true" default-value="CURRENT_TIMESTAMP">
-		<type name="timestamp" length="0" precision="3"/>
-	</column>
-	<column name="user_id" not-null="true">
-		<type name="text" length="0"/>
-	</column>
-	<constraint name="Tree_pkey" type="pk-constr" table="public.&quot;Tree&quot;">
-		<columns names="value,parent" ref-type="src-columns"/>
-	</constraint>
-</table>
-
-<table name="Related_tree" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="40" y="1060"/>
-	<column name="main_value" not-null="true">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="main_parent" not-null="true">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="related_value" not-null="true">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="related_parent" not-null="true">
-		<type name="integer" length="0"/>
-	</column>
-	<constraint name="Related_tree_pkey" type="pk-constr" table="public.&quot;Related_tree&quot;">
-		<columns names="main_value,main_parent,related_value,related_parent" ref-type="src-columns"/>
-	</constraint>
-</table>
-
-<table name="User" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
-	<schema name="public"/>
-	<role name="postgres"/>
-	<position x="1220" y="820"/>
-	<column name="id" not-null="true">
-		<type name="text" length="0"/>
-	</column>
-	<column name="username" not-null="true">
-		<type name="character varying" length="16"/>
-	</column>
-	<column name="email" not-null="true">
-		<type name="character varying" length="255"/>
-	</column>
-	<column name="password" not-null="true">
-		<type name="character varying" length="32"/>
-	</column>
-	<column name="create_time" not-null="true" default-value="CURRENT_TIMESTAMP">
-		<type name="timestamp" length="0" precision="3"/>
-	</column>
-	<column name="update_time" not-null="true">
-		<type name="timestamp" length="0" precision="3"/>
-	</column>
-	<constraint name="User_pkey" type="pk-constr" table="public.&quot;User&quot;">
-		<columns names="id" ref-type="src-columns"/>
-	</constraint>
-</table>
-
 <index name="Tree_user_id_idx" table="public.&quot;Tree&quot;"
 	 concurrent="false" unique="false" fast-update="false" buffering="false"
 	 index-type="btree" factor="90">
@@ -540,6 +554,17 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 index-type="btree" factor="90">
 		<idxelement use-sorting="false">
 			<column name="email"/>
+		</idxelement>
+</index>
+
+<index name="Job_user_id_data_idx" table="public.&quot;Job&quot;"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="user_id"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="data"/>
 		</idxelement>
 </index>
 
@@ -651,142 +676,157 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="Related_tree_main_value_main_parent_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
-	 upd-action="CASCADE" del-action="RESTRICT" ref-table="public.&quot;Tree&quot;" table="public.&quot;Related_tree&quot;">
-	<columns names="main_value,main_parent" ref-type="src-columns"/>
-	<columns names="value,parent" ref-type="dst-columns"/>
+<constraint name="Tree_previousMoveId_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="SET NULL" ref-table="public.&quot;Tree&quot;" table="public.&quot;Tree&quot;">
+	<columns names="previousMoveId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="Related_tree_related_value_related_parent_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
-	 upd-action="CASCADE" del-action="RESTRICT" ref-table="public.&quot;Tree&quot;" table="public.&quot;Related_tree&quot;">
-	<columns names="related_value,related_parent" ref-type="src-columns"/>
-	<columns names="value,parent" ref-type="dst-columns"/>
+<constraint name="Job_user_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="RESTRICT" ref-table="public.&quot;User&quot;" table="public.&quot;Job&quot;">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
 <relationship name="rel_achievement_user_achievement" type="relfk" layers="0"
-	 custom-color="#d6f068"
+	 custom-color="#7ead62"
 	 src-table="public.achievement_user"
 	 dst-table="public.achievement" reference-fk="fk_achievement_has_user_achievement1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="&quot;rel_achievement_user_User&quot;" type="relfk" layers="0"
-	 custom-color="#109511"
+	 custom-color="#de433b"
 	 src-table="public.achievement_user"
 	 dst-table="public.&quot;User&quot;" reference-fk="fk_achievement_has_user_user1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_buy_item" type="relfk" layers="0"
-	 custom-color="#a57921"
+	 custom-color="#fa0ec4"
 	 src-table="public.buy"
 	 dst-table="public.item" reference-fk="fk_buy_item1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="&quot;rel_buy_User&quot;" type="relfk" layers="0"
-	 custom-color="#74a4d7"
+	 custom-color="#e2a05d"
 	 src-table="public.buy"
 	 dst-table="public.&quot;User&quot;" reference-fk="fk_buy_user1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_buy_coin_buy" type="relfk" layers="0"
-	 custom-color="#afd81a"
+	 custom-color="#c020d8"
 	 src-table="public.buy_coin"
 	 dst-table="public.buy" reference-fk="fk_buy_has_coin_buy1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_buy_coin_coin" type="relfk" layers="0"
-	 custom-color="#15ecc9"
+	 custom-color="#515d14"
 	 src-table="public.buy_coin"
 	 dst-table="public.coin" reference-fk="fk_buy_has_coin_coin1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_click_link" type="relfk" layers="0"
-	 custom-color="#a08834"
+	 custom-color="#534199"
 	 src-table="public.click"
 	 dst-table="public.link" reference-fk="fk_click_link1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="&quot;rel_coin_User&quot;" type="relfk" layers="0"
-	 custom-color="#a40294"
+	 custom-color="#94d702"
 	 src-table="public.coin"
 	 dst-table="public.&quot;User&quot;" reference-fk="fk_coin_user1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="&quot;rel_friend_User&quot;" type="relfk" layers="0"
-	 custom-color="#5e76d6"
+	 custom-color="#d99e36"
 	 src-table="public.friend"
 	 dst-table="public.&quot;User&quot;" reference-fk="fk_friends_user1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="&quot;rel_friend_User1&quot;" type="relfk" layers="0"
-	 custom-color="#6f98e4"
+	 custom-color="#ba1ac3"
 	 src-table="public.friend"
 	 dst-table="public.&quot;User&quot;" reference-fk="fk_friends_user2"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_interaction_activity" type="relfk" layers="0"
-	 custom-color="#14d453"
+	 custom-color="#c29c4a"
 	 src-table="public.interaction"
 	 dst-table="public.activity" reference-fk="fk_interaction_activity1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_interaction_session_interaction" type="relfk" layers="0"
-	 custom-color="#c8adc2"
+	 custom-color="#ebdf4e"
 	 src-table="public.interaction_session"
 	 dst-table="public.interaction" reference-fk="fk_interaction_has_session_interaction1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_interaction_session_session" type="relfk" layers="0"
-	 custom-color="#f478d2"
+	 custom-color="#696f22"
 	 src-table="public.interaction_session"
 	 dst-table="public.session" reference-fk="fk_interaction_has_session_session1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="&quot;rel_link_User&quot;" type="relfk" layers="0"
-	 custom-color="#d8068d"
+	 custom-color="#984304"
 	 src-table="public.link"
 	 dst-table="public.&quot;User&quot;" reference-fk="fk_link_user1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="&quot;rel_location_User&quot;" type="relfk" layers="0"
-	 custom-color="#ff5242"
+	 custom-color="#5c9761"
 	 src-table="public.location"
 	 dst-table="public.&quot;User&quot;" reference-fk="fk_location_user1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_session_session" type="relfk" layers="0"
-	 custom-color="#c4e1d2"
+	 custom-color="#7748a9"
 	 src-table="public.session"
 	 dst-table="public.session" reference-fk="fk_session_session1"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="2085" y="1033.64"/>
-	<position x="2085" y="918"/>
-	<position x="1942" y="918"/>
+		<position x="2825" y="453.641"/>
+	<position x="2825" y="338"/>
+	<position x="2682" y="338"/>
 	</line>
 </relationship>
 
 <relationship name="&quot;rel_session_User&quot;" type="relfk" layers="0"
-	 custom-color="#f0fd2f"
+	 custom-color="#652452"
 	 src-table="public.session"
 	 dst-table="public.&quot;User&quot;" reference-fk="fk_session_user1"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="&quot;rel_Tree_User&quot;" type="relfk" layers="0"
-	 custom-color="#af0099"
+	 custom-color="#f84cdc"
 	 src-table="public.&quot;Tree&quot;"
 	 dst-table="public.&quot;User&quot;" reference-fk="Tree_user_id_fkey"
 	 src-required="false" dst-required="true"/>
 
-<relationship name="&quot;rel_Related_tree_Tree&quot;" type="relfk" layers="0"
-	 custom-color="#6b5c5c"
-	 src-table="public.&quot;Related_tree&quot;"
-	 dst-table="public.&quot;Tree&quot;" reference-fk="Related_tree_main_value_main_parent_fkey"
+<relationship name="rel_Tree_Tree" type="relfk" layers="0"
+	 custom-color="#84a267"
+	 src-table="public.&quot;Tree&quot;"
+	 dst-table="public.&quot;Tree&quot;" reference-fk="Tree_previousMoveId_fkey"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="2708.91" y="841.175"/>
+	<position x="2708.91" y="718"/>
+	<position x="2577.94" y="718"/>
+	</line>
+</relationship>
+
+<relationship name="&quot;rel_Job_User&quot;" type="relfk" layers="0"
+	 custom-color="#65e7a2"
+	 src-table="public.&quot;Job&quot;"
+	 dst-table="public.&quot;User&quot;" reference-fk="Job_user_id_fkey"
 	 src-required="false" dst-required="true"/>
 
-<relationship name="&quot;rel_Related_tree_Tree1&quot;" type="relfk" layers="0"
-	 custom-color="#d17462"
-	 src-table="public.&quot;Related_tree&quot;"
-	 dst-table="public.&quot;Tree&quot;" reference-fk="Related_tree_related_value_related_parent_fkey"
-	 src-required="false" dst-required="true"/>
-
+<permission>
+	<object name="public" type="schema"/>
+	<roles names="pg_database_owner"/>
+	<privileges create="true" usage="true"/>
+</permission>
+<permission>
+	<object name="public" type="schema"/>
+	<privileges usage="true"/>
+</permission>
 </dbmodel>
