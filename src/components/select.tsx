@@ -71,10 +71,7 @@ export default function Select_large(props: any) {
               resolve([]);
             } else {
               const result: Array<Select_t> = filter.map((e: any) => {
-                return {
-                  label: String(e.item.label),
-                  value: Number(e.item.value),
-                };
+                return { ...e.item };
               });
               resolve(result);
             }
@@ -84,3 +81,4 @@ export default function Select_large(props: any) {
     />
   );
 }
+

@@ -38,60 +38,40 @@ function buscaBinaria(array: Array<any>, alvo: number) {
 }
 
 const fetchDataUf = async (input: any) => {
-  const index_counry = buscaBinaria(input.countries, input.counry);
-  console.log(
-    "fetchDataUf",
-    index_counry,
-    input.counry,
-    input.countries[index_counry].ISO
-  );
+  //const index_counry = buscaBinaria(input.countries, input.counry.value);
+  console.log("fetchDataUf", input);
 
-  if (index_counry != -1) {
-    const res = await fetch(
-      `https://www.geonames.org/servlet/geonames?&srv=163&country=${input.countries[index_counry].ISO}&featureCode=ADM1&lang=en&type=json`
-    );
-    if (!res.ok) {
-      throw new Error("Network response was not ok");
-    }
-    try {
-    } catch (error) {}
-    const uf_city = await res.json();
-    //console.log("uf_city", uf_city);
-    return uf_city.geonames.map((e: any) => {
-      return { value: Number(e.adminCode1), label: e.name };
-    });
-  } else {
-    throw new Error("counry invalido");
+  const res = await fetch(
+    `https://www.geonames.org/servlet/geonames?&srv=163&country=${input.counry.ISO}&featureCode=ADM1&lang=en&type=json`
+  );
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
   }
+  try {
+  } catch (error) {}
+  const uf_city = await res.json();
+  //console.log("uf_city", uf_city);
+  return uf_city.geonames.map((e: any) => {
+    return { value: Number(e.adminCode1), label: e.name };
+  });
 };
 
 const fetchDataCity = async (input: any) => {
-  console.log("fetchDataCity",input)
-  /*const index_counry = buscaBinaria(input.countries, input.counry);
-  console.log(
-    "fetchData",
-    index_counry,
-    input.counry,
-    input.countries[index_counry].ISO
-  );
+  console.log("fetchDataCity", input);
 
-  if (index_counry != -1) {
-    const res = await fetch(
-      `https://www.geonames.org/servlet/geonames?&srv=163&country=${input.countries[index_counry].ISO}&featureCode=ADM1&lang=en&type=json`
-    );
-    if (!res.ok) {
-      throw new Error("Network response was not ok");
-    }
-    try {
-    } catch (error) {}
-    const uf_city = await res.json();
-    //console.log("uf_city", uf_city);
-    return uf_city.geonames.map((e: any) => {
-      return { value: Number(e.adminCode1), label: e.name };
-    });
-  } else {
-    throw new Error("counry invalido");
-  }*/
+  const res = await fetch(
+    `https://www.geonames.org/servlet/geonames?&srv=163&country=${input.counry.ISO}&adminCode1=${input.uf}&featureCode=ADM2&lang=en&type=json`
+  );
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
+  }
+  try {
+  } catch (error) {}
+  const uf_city = await res.json();
+  //console.log("uf_city", uf_city);
+  return uf_city.geonames.map((e: any) => {
+    return { value: Number(e.adminCode1), label: e.name };
+  });
 };
 
 export default function ProfileEdit(props: any) {
@@ -104,23 +84,10 @@ export default function ProfileEdit(props: any) {
   const [select_counry, set_select_counry] = useState(null);
   const [select_uf, set_select_uf] = useState(null);
   const [select_city, set_select_city] = useState(null);
-  const [options_uf, set_options_uf] = useState([]);
-  const [options_city, set_options_city] = useState([]);
-  
 
-  const uf_mutation = useMutation(fetchDataUf, {
-    onSuccess: (data: any) => {
-      // Atualiza o estado do componente com os novos dados
-      set_options_uf(data);
-    },
-  });
+  const counry_options = useMutation(fetchDataUf);
 
-  const city_mutation = useMutation(fetchDataCity, {
-    onSuccess: (data: any) => {
-      // Atualiza o estado do componente com os novos dados
-      set_options_city(data);
-    },
-  });
+  const uf_options = useMutation(fetchDataCity);
 
   const onSubmit = (data: any) => console.log(data);
 
@@ -166,14 +133,14 @@ export default function ProfileEdit(props: any) {
                     options={props.countries}
                     onChange={(e: any) => {
                       set_select_counry(e);
-                      uf_mutation.mutate({
-                        countries: props.countries,
-                        counry: e.value,
+                      counry_options.mutate({
+                        counry: e,
                       });
                       field.onChange(e); // make sure to keep this to update form state
                     }}
                     value={select_counry}
-                    placeholder="Pais"
+                    instanceId="countries-select"
+                    placeholder="Paises"
                     styles={{
                       control: (baseStyles: any, state: any) => ({
                         ...baseStyles,
@@ -188,111 +155,90 @@ export default function ProfileEdit(props: any) {
               />
             </div>
             <div className="col-sm-6">
-              <Controller
-                name="uf"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    options={uf_mutation.data}
-                    onChange={(e: any) => {
-                      set_select_city(e);
-                      city_mutation.mutate({
-                        cities: city_mutation.data,
-                        city: e.value,
-                      });
-                      field.onChange(e);
-                    }}
-                    value={select_uf}
-                    placeholder="Estado"
-                    styles={{
-                      control: (baseStyles: any, state: any) => ({
-                        ...baseStyles,
-                        borderColor: state.isFocused ? "grey" : "blue",
-                        borderRadius: "20px",
-                        border: "2px solid #ffffff",
-                        margin: "8px",
-                      }),
-                    }}
-                  />
-                )}
-              />
-            </div>
-            <div className="d-flex mb-3 justify-content-center">
-              {uf_mutation.status == "loading" ? (
+              {counry_options.status == "loading" ? (
                 <div>Loading...</div>
               ) : (
                 <>
-                  {uf_mutation.status == "error" ? (
+                  {counry_options.status == "error" ? (
                     <div>
-                      An error has occurred: {JSON.stringify(uf_mutation)}
+                      An error has occurred: {JSON.stringify(counry_options)}
                     </div>
                   ) : (
-                    /*uf_mutation.data.map((e: any) => {
-                      //return <>{JSON.stringify(e)}</>;
-                    })*/
-                    <></>
+                    <Controller
+                      name="uf"
+                      control={control}
+                      defaultValue=""
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          options={counry_options.data}
+                          onChange={(e: any) => {
+                            set_select_uf(e);
+                            uf_options.mutate({
+                              counry: select_counry,
+                              uf: e.value,
+                            });
+                            field.onChange(e);
+                          }}
+                          value={select_uf}
+                          instanceId="uf-select"
+                          placeholder="Estados"
+                          styles={{
+                            control: (baseStyles: any, state: any) => ({
+                              ...baseStyles,
+                              borderColor: state.isFocused ? "grey" : "blue",
+                              borderRadius: "20px",
+                              border: "2px solid #ffffff",
+                              margin: "8px",
+                            }),
+                          }}
+                        />
+                      )}
+                    />
                   )}
                 </>
               )}
-
-              {/*<Controller
-                  name="uf"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Select
-                      {...field}
-                      options={uf}
-                      onChange={(e: any) => {
-                        set_select_uf(e);
-                        set_options_city(uf_city[e.value]);
-                        field.onChange(e); // make sure to keep this to update form state
-                      }}
-                      value={select_uf}
-                      placeholder="Estado"
-                      styles={{
-                        control: (baseStyles: any, state: any) => ({
-                          ...baseStyles,
-                          borderColor: state.isFocused ? "grey" : "blue",
-                          borderRadius: "20px",
-                          border: "2px solid #ffffff",
-                          margin: "8px",
-                        }),
-                      }}
+            </div>
+            <div className="col-sm-6">
+              {uf_options.status == "loading" ? (
+                <div>Loading...</div>
+              ) : (
+                <>
+                  {uf_options.status == "error" ? (
+                    <div>
+                      An error has occurred: {JSON.stringify(uf_options)}
+                    </div>
+                  ) : (
+                    <Controller
+                      name="city"
+                      control={control}
+                      defaultValue=""
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          options={uf_options.data}
+                          onChange={(e: any) => {
+                            set_select_city(e);
+                            field.onChange(e);
+                          }}
+                          value={select_city}
+                          instanceId="city-select"
+                          placeholder="Cidades"
+                          styles={{
+                            control: (baseStyles: any, state: any) => ({
+                              ...baseStyles,
+                              borderColor: state.isFocused ? "grey" : "blue",
+                              borderRadius: "20px",
+                              border: "2px solid #ffffff",
+                              margin: "8px",
+                            }),
+                          }}
+                        />
+                      )}
                     />
                   )}
-                />
-         
-
-              <Controller
-                name="city"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    options={options_city}
-                    placeholder="Cidade"
-                    onChange={(e: any) => {
-                      set_select_city(e);
-                      field.onChange(e); // make sure to keep this to update form state
-                    }}
-                    value={select_city}
-                    styles={{
-                      control: (baseStyles: any, state: any) => ({
-                        ...baseStyles,
-                        borderColor: state.isFocused ? "#ffffff" : "#ffffff",
-                        margin: "8px",
-                        borderRadius: "20px",
-                        border: "2px solid #ffffff",
-                        width: "200px",
-                      }),
-                    }}
-                  />
-                )}
-                  />*/}
+                </>
+              )}
             </div>
 
             <button className="btn btn-primary col-md-4" type="submit">
@@ -307,7 +253,7 @@ export default function ProfileEdit(props: any) {
 
 export async function getStaticProps(context: any) {
   const countries_json = require("../../public/countries.json");
-  let countries: Array<Select_t> = countries_json.map((e: any) => {
+  let countries: Array<any> = countries_json.map((e: any) => {
     return { value: Number(e["ISO-Numeric"]), label: e.Country, ISO: e.ISO };
   });
 
