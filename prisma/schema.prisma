@@ -158,6 +158,7 @@ model User {
   username                      String             @db.VarChar(16)
   email                         String             @unique @db.VarChar(255)
   password                      String             @db.VarChar(32)
+  birthday                      DateTime
   create_time                   DateTime           @default(now())
   update_time                   DateTime           @updatedAt
   achievement_user              achievement_user[]
@@ -176,9 +177,9 @@ model location {
   id        Int     @id
   latitude  Decimal @db.Decimal
   longitude Decimal @db.Decimal
-  city      String  @db.VarChar(45)
-  state     String  @db.Char(2)
-  nation    String  @db.VarChar(45)
+  city      Int
+  state     Int
+  nation    String  @db.Char(2)
   user_id   String
   user      User    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_location_user1")
 

@@ -3,11 +3,6 @@ import Fuse from "fuse.js";
 import AsyncSelect from "react-select/async";
 import { FixedSizeList as List } from "react-window";
 
-type Select_t = {
-  value: Number;
-  label: String;
-};
-
 const OPTION_HEIGHT = 40;
 const ROWS = 6;
 
@@ -35,7 +30,18 @@ const MenuList = ({ options, children, getValue, width }: any) => {
       initialScrollOffset={initialOffset}
     >
       {({ style, index }) => {
-        return <div style={style}>{children[index]}</div>;
+        return (
+          <div
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              ...style,
+            }}
+          >
+            {children[index]}
+          </div>
+        );
       }}
     </List>
   ) : (
@@ -70,7 +76,7 @@ export default function Select_large(props: any) {
             if (filter.length == 0) {
               resolve([]);
             } else {
-              const result: Array<Select_t> = filter.map((e: any) => {
+              const result: Array<any> = filter.map((e: any) => {
                 return { ...e.item };
               });
               resolve(result);
@@ -81,4 +87,3 @@ export default function Select_large(props: any) {
     />
   );
 }
-

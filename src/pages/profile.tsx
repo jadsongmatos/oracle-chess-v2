@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 
 import { useForm, Controller } from "react-hook-form";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-import Header from "@/components/header";
+import Layout from "@/components/layout";
 import Select from "@/components/select";
 
 export default function ProfileEdit(props: any) {
@@ -16,122 +17,83 @@ export default function ProfileEdit(props: any) {
     control,
     formState: { errors },
   } = useForm();
-  const [select_counry, set_select_counry] = useState(null);
-  const [select_uf, set_select_uf] = useState(null);
-  const [select_city, set_select_city] = useState(null);
-  const [uf_options, set_uf_options] = useState();
-  const [city_options, set_city_options] = useState();
+  const [select_counry, set_select_counry] = useState<any>(false);
+  const [select_uf, set_select_uf] = useState<any>(false);
+  const [select_city, set_select_city] = useState<any>(false);
 
-  const counry_mutation = useMutation({
-    mutationKey: ["uf"],
-    mutationFn: async (input: any) => {
-      //const index_counry = buscaBinaria(input.countries, input.counry.value);
-      const previousData: any = queryClient.getQueryData([
-        "uf",
-        input.counry.value,
-      ]);
+  const uf_options = useQuery(["uf", select_counry.ISO], async () => {
+    if (!select_counry) {
+      return false;
+    }
+    console.log("uf useQuery", select_counry);
+    const previousData: any = queryClient.getQueryData([
+      "uf",
+      select_counry.ISO,
+    ]);
 
-      console.log("fetchDataUf", input, previousData);
-      if (previousData) {
-        set_uf_options(previousData);
-        return previousData;
-      }
+    if (previousData) {
+      return previousData;
+    }
 
-      const res = await fetch(
-        `https://www.geonames.org/servlet/geonames?&srv=163&country=${input.counry.ISO}&featureCode=ADM1&lang=en&type=json`
+    try {
+      const res = await axios(
+        `https://www.geonames.org/servlet/geonames?&srv=163&country=${select_counry.ISO}&featureCode=ADM1&lang=en&type=json`
       );
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const uf = await res.json();
-      const data = uf.geonames.map((e: any) => {
+      const data = res.data.geonames.map((e: any) => {
         return { value: Number(e.adminCode1), label: e.name };
       });
-      set_uf_options(data);
+
       return data;
-    },
-    onMutate: async (variables) => {
-      await queryClient.cancelQueries({
-        queryKey: ["uf", variables.counry.value],
-      });
-      const previousData: any = queryClient.getQueryData([
-        "uf",
-        variables.counry.value,
-      ]);
-
-      //console.log("previousData", previousData, variables.counry.value);
-      return previousData?.data;
-    },
-    onSuccess: async (data: any, variables: any) => {
-      //console.log("useMutation", data, variables, select_counry);
-
-      queryClient.setQueryData(["uf", variables.counry.value], data);
-    },
-    /*onError: (_, variables, context) => {
-      queryClient.setQueryData(
-        ["uf_data", variables.counry.value],
-        context.previousData
-      );
-    },
-    onSettled: (data, error, variables) => {
-      queryClient.invalidateQueries(["uf_data", variables.counry.value]);
-    },*/
+    } catch (err) {
+      console.log("err", err);
+      throw new Error("Network response was not ok");
+    }
   });
 
-  const uf_mutation = useMutation({
-    mutationKey: ["city"],
-    mutationFn: async (input: any) => {
-      const previousData: any = queryClient.getQueryData([
-        "city",
-        input.counry.value,
-      ]);
+  const city_options = useQuery(["city", select_uf.value], async () => {
+    if (!select_uf) {
+      return false;
+    }
 
-      if (previousData) {
-        set_city_options(previousData);
-        return previousData;
-      }
+    console.log("city useQuery", select_uf);
+    const previousData: any = queryClient.getQueryData([
+      "city",
+      select_uf.value,
+    ]);
 
-      const res = await fetch(
-        `https://www.geonames.org/servlet/geonames?&srv=163&country=${input.counry.ISO}&adminCode1=${input.uf}&featureCode=ADM2&lang=en&type=json`
-      );
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
-      }
-      try {
-        const city = await res.json();
-        const data = city.geonames.map((e: any) => {
-          return { value: Number(e.adminCode1), label: e.name };
-        });
-        set_city_options(data);
-        return data;
-      } catch (error) {
-        throw new Error("json");
-      }
-    },
-    onMutate: async (variables) => {
-      await queryClient.cancelQueries({
-        queryKey: ["city", variables.counry.value],
-      });
-      const previousData: any = queryClient.getQueryData([
-        "city",
-        variables.counry.value,
-      ]);
+    if (previousData) {
       return previousData;
-    },
-    onSuccess: async (data: any, variables: any) => {
-      queryClient.setQueryData(["city", variables.counry.value], data);
-    },
+    }
+
+    try {
+      const res = await axios(
+        `https://www.geonames.org/servlet/geonames?&srv=163&country=${
+          select_counry.ISO
+        }&adminCode1=${String(select_uf.value).padStart(
+          2,
+          "0"
+        )}&featureCode=ADM2&lang=en&type=json`
+      );
+
+      const city = res.data.geonames.map((e: any) => {
+        return { value: Number(e.adminCode2), label: e.name };
+      });
+
+      return city;
+    } catch (err) {
+      console.log("err", err);
+      throw new Error("Network response was not ok");
+    }
   });
 
   const onSubmit = (data: any) => console.log(data);
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>Perfil - Oracle Chess</title>
       </Head>
-      <Header />
+
       <main className="mt-5 py-5">
         <section className="container mb-5">
           <h1>Edit Profile</h1>
@@ -145,7 +107,7 @@ export default function ProfileEdit(props: any) {
                 type="text"
                 className={`form-control ${
                   errors.username ? "is-invalid" : ""
-                }`}
+                } rounded-5 shadow`}
                 {...register("username", {
                   required: true,
                   minLength: 6,
@@ -158,6 +120,7 @@ export default function ProfileEdit(props: any) {
               )}
             </div>
             <div className="col-sm-6">
+              <label>Selecione seu pais</label>
               <Controller
                 name="countries"
                 control={control}
@@ -168,12 +131,8 @@ export default function ProfileEdit(props: any) {
                     options={props.countries}
                     onChange={(e: any) => {
                       set_select_counry(e);
-                      set_select_uf(null);
-                      set_select_city(null);
-                      set_city_options(undefined)
-                      counry_mutation.mutate({
-                        counry: e,
-                      });
+                      set_select_uf(false);
+                      set_select_city(false);
 
                       field.onChange(e); // make sure to keep this to update form state
                     }}
@@ -183,10 +142,10 @@ export default function ProfileEdit(props: any) {
                     styles={{
                       control: (baseStyles: any, state: any) => ({
                         ...baseStyles,
-                        borderColor: state.isFocused ? "grey" : "blue",
-                        borderRadius: "20px",
-                        border: "2px solid #ffffff",
-                        margin: "8px",
+                        borderRadius: "var(--bs-border-radius-xxl)!important",
+                        margin: ".5rem!important",
+                        border: "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
+                        boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important",
                       }),
                     }}
                   />
@@ -194,13 +153,18 @@ export default function ProfileEdit(props: any) {
               />
             </div>
             <div className="col-sm-6">
-              {counry_mutation.status == "loading" ? (
-                <div>Loading...</div>
+              <label className="w-100">Selecione seu estado</label>
+              {uf_options.status == "loading" ? (
+                <div className="text-center">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
               ) : (
                 <>
-                  {counry_mutation.status == "error" ? (
+                  {uf_options.status == "error" ? (
                     <div>
-                      An error has occurred: {JSON.stringify(counry_mutation)}
+                      An error has occurred: {JSON.stringify(uf_options)}
                     </div>
                   ) : (
                     <Controller
@@ -210,14 +174,10 @@ export default function ProfileEdit(props: any) {
                       render={({ field }) => (
                         <Select
                           {...field}
-                          options={uf_options}
+                          options={uf_options.data}
                           onChange={(e: any) => {
                             set_select_uf(e);
-                            set_select_city(null);
-                            uf_mutation.mutate({
-                              counry: select_counry,
-                              uf: e.value,
-                            });
+                            set_select_city(false);
                             field.onChange(e);
                           }}
                           value={select_uf}
@@ -226,10 +186,12 @@ export default function ProfileEdit(props: any) {
                           styles={{
                             control: (baseStyles: any, state: any) => ({
                               ...baseStyles,
-                              borderColor: state.isFocused ? "grey" : "blue",
-                              borderRadius: "20px",
-                              border: "2px solid #ffffff",
-                              margin: "8px",
+                              borderRadius:
+                                "var(--bs-border-radius-xxl)!important",
+                              margin: ".5rem!important",
+                              border: "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
+                              boxShadow:
+                                "0 .5rem 1rem rgba(0,0,0,.15)!important",
                             }),
                           }}
                         />
@@ -240,13 +202,18 @@ export default function ProfileEdit(props: any) {
               )}
             </div>
             <div className="col-sm-6">
-              {uf_mutation.status == "loading" ? (
-                <div>Loading...</div>
+              <label className="w-100">Selecione sua cidade</label>
+              {city_options.status == "loading" ? (
+                <div className="text-center">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
               ) : (
                 <>
-                  {uf_mutation.status == "error" ? (
+                  {city_options.status == "error" ? (
                     <div>
-                      An error has occurred: {JSON.stringify(uf_mutation)}
+                      An error has occurred: {JSON.stringify(city_options)}
                     </div>
                   ) : (
                     <Controller
@@ -256,7 +223,7 @@ export default function ProfileEdit(props: any) {
                       render={({ field }) => (
                         <Select
                           {...field}
-                          options={city_options}
+                          options={city_options.data}
                           onChange={(e: any) => {
                             set_select_city(e);
                             field.onChange(e);
@@ -267,10 +234,12 @@ export default function ProfileEdit(props: any) {
                           styles={{
                             control: (baseStyles: any, state: any) => ({
                               ...baseStyles,
-                              borderColor: state.isFocused ? "grey" : "blue",
-                              borderRadius: "20px",
-                              border: "2px solid #ffffff",
-                              margin: "8px",
+                              borderRadius:
+                                "var(--bs-border-radius-xxl)!important",
+                              margin: ".5rem!important",
+                              border: "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
+                              boxShadow:
+                                "0 .5rem 1rem rgba(0,0,0,.15)!important",
                             }),
                           }}
                         />
@@ -280,13 +249,32 @@ export default function ProfileEdit(props: any) {
                 </>
               )}
             </div>
-            <button className="btn btn-primary col-md-4" type="submit">
-              Update Profile
-            </button>
+            <div className="col-sm-6">
+              <label>Data aniversário</label>
+              <input
+                type="date"
+                className="form-control rounded-5 shadow px-2 pt-1 m-2 w-100 border"
+                {...register("date", {
+                  valueAsDate: true,
+                })}
+              />
+            </div>
+            <div className="col-12 d-flex text-center">
+              <button
+                className="btn btn-primary mx-auto rounded-5 shadow"
+                type="submit"
+              >
+                Criar conta
+              </button>
+              {}
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
           </form>
         </section>
       </main>
-    </>
+    </Layout>
   );
 }
 

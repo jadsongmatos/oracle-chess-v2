@@ -49,6 +49,13 @@
         "Continent": "AS"
     },
     {
+        "ISO": "AN",
+        "ISO3": "ANT",
+        "ISO-Numeric": "530",
+        "Country": "Netherlands Antilles",
+        "Continent": "NA"
+    },
+    {
         "ISO": "AO",
         "ISO3": "AGO",
         "ISO-Numeric": "24",
@@ -348,6 +355,13 @@
         "ISO-Numeric": "188",
         "Country": "Costa Rica",
         "Continent": "NA"
+    },
+    {
+        "ISO": "CS",
+        "ISO3": "SCG",
+        "ISO-Numeric": "891",
+        "Country": "Serbia and Montenegro",
+        "Continent": "EU"
     },
     {
         "ISO": "CU",
@@ -700,7 +714,7 @@
         "Continent": "EU"
     },
     {
-        "ISO": "\"ID\"",
+        "ISO": "ID",
         "ISO3": "IDN",
         "ISO-Numeric": "360",
         "Country": "Indonesia",
@@ -852,13 +866,6 @@
         "ISO-Numeric": "410",
         "Country": "South Korea",
         "Continent": "AS"
-    },
-    {
-        "ISO": "XK",
-        "ISO3": "XKX",
-        "ISO-Numeric": "0",
-        "Country": "Kosovo",
-        "Continent": "EU"
     },
     {
         "ISO": "KW",
@@ -1379,13 +1386,6 @@
         "Continent": "AF"
     },
     {
-        "ISO": "SS",
-        "ISO3": "SSD",
-        "ISO-Numeric": "728",
-        "Country": "South Sudan",
-        "Continent": "AF"
-    },
-    {
         "ISO": "SE",
         "ISO3": "SWE",
         "ISO-Numeric": "752",
@@ -1461,6 +1461,13 @@
         "ISO-Numeric": "740",
         "Country": "Suriname",
         "Continent": "SA"
+    },
+    {
+        "ISO": "SS",
+        "ISO3": "SSD",
+        "ISO-Numeric": "728",
+        "Country": "South Sudan",
+        "Continent": "AF"
     },
     {
         "ISO": "ST",
@@ -1715,6 +1722,13 @@
         "Continent": "OC"
     },
     {
+        "ISO": "XK",
+        "ISO3": "XKX",
+        "ISO-Numeric": "0",
+        "Country": "Kosovo",
+        "Continent": "EU"
+    },
+    {
         "ISO": "YE",
         "ISO3": "YEM",
         "ISO-Numeric": "887",
@@ -1748,19 +1762,5 @@
         "ISO-Numeric": "716",
         "Country": "Zimbabwe",
         "Continent": "AF"
-    },
-    {
-        "ISO": "CS",
-        "ISO3": "SCG",
-        "ISO-Numeric": "891",
-        "Country": "Serbia and Montenegro",
-        "Continent": "EU"
-    },
-    {
-        "ISO": "AN",
-        "ISO3": "ANT",
-        "ISO-Numeric": "530",
-        "Country": "Netherlands Antilles",
-        "Continent": "NA"
     }
 ]
