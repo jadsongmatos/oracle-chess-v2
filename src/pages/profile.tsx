@@ -1,25 +1,31 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { useState, useEffect } from "react";
 
 import { useForm, Controller } from "react-hook-form";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 import Layout from "@/components/layout";
 import Select from "@/components/select";
 
 export default function ProfileEdit(props: any) {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
+    setValue,
     control,
     formState: { errors },
   } = useForm();
   const [select_counry, set_select_counry] = useState<any>(false);
   const [select_uf, set_select_uf] = useState<any>(false);
   const [select_city, set_select_city] = useState<any>(false);
+  const [loading, set_loading] = useState<any>(false);
+  const localisacao = useQuery(["localisacao"]);
 
   const uf_options = useQuery(["uf", select_counry.ISO], async () => {
     if (!select_counry) {
@@ -86,7 +92,63 @@ export default function ProfileEdit(props: any) {
     }
   });
 
-  const onSubmit = (data: any) => console.log(data);
+  useEffect(() => {
+    if (localisacao.data) {
+      console.log("localisacao", localisacao.data);
+      const tmp: any = localisacao.data;
+      set_select_counry({
+        value: Number(tmp.counry["ISO-Numeric"]),
+        label: tmp.counry.Country,
+        ISO: tmp.counry.ISO,
+      });
+      setValue("counry", {
+        value: Number(tmp.counry["ISO-Numeric"]),
+        label: tmp.counry.Country,
+        ISO: tmp.counry.ISO,
+      });
+      set_select_uf(tmp.uf);
+      setValue("uf", tmp.uf);
+      set_select_city(tmp.city);
+      setValue("city", tmp.city);
+    }
+  }, [localisacao.data]);
+
+  const onSubmit = async (data: any) => {
+    console.log("onSubmit", data);
+    set_loading(true);
+
+    let body = {
+      username: data.name,
+      email: data.email,
+      password: data.password,
+      birthday: data.birthday,
+      state: data.uf.value,
+      city: data.city.value,
+      nation: data.counry.ISO,
+      latitude: 0,
+      longitude: 0,
+    };
+    if (localisacao.data) {
+      const tmp: any = localisacao.data;
+      body.latitude = tmp.latitude;
+      body.longitude = tmp.longitude;
+    }
+    try {
+      const res = await axios.post("/api/profile", body);
+      console.log(res);
+      router.push("/");
+    } catch (error: any) {
+      if (error.response.data.code == "P2002") {
+        toast.error(
+          `Erro ja existe um usario com esse ${error.response.data.target[0]}`
+        );
+      } else {
+        console.log("axios error", error);
+      }
+    }
+
+    set_loading(false);
+  };
 
   return (
     <Layout>
@@ -102,29 +164,76 @@ export default function ProfileEdit(props: any) {
             className="row g-3 needs-validation"
           >
             <div className="col-12">
-              <label className="form-label">Nome</label>
+              <label className="form-label" htmlFor="name">
+                Nome
+              </label>
               <input
                 type="text"
+                id="name"
                 className={`form-control ${
                   errors.username ? "is-invalid" : ""
                 } rounded-5 shadow`}
-                {...register("username", {
+                {...register("name", {
                   required: true,
                   minLength: 6,
                 })}
               />
-              {errors.username && (
+              {errors.name && (
                 <div className="invalid-feedback">
                   Por favor ensira um nome válido!
+                </div>
+              )}
+            </div>
+            <div className="col-12">
+              <label className="form-label" htmlFor="email">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                className={`form-control ${
+                  errors.email ? "is-invalid" : ""
+                } rounded-5 shadow`}
+                {...register("email", {
+                  required: true,
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Entered value does not match email format",
+                  },
+                })}
+              />
+              {errors.email && (
+                <div className="invalid-feedback">
+                  Por favor ensira um email válido!
+                </div>
+              )}
+            </div>
+            <div className="col-12">
+              <label htmlFor="password">password</label>
+              <input
+                id="password"
+                className={`form-control ${
+                  errors.password ? "is-invalid" : ""
+                } rounded-5 shadow`}
+                {...register("password", {
+                  required: "required",
+                  minLength: 5,
+                })}
+                type="password"
+              />
+              {errors.password && (
+                <div className="invalid-feedback">
+                  Por favor ensira uma senha maior que 5!
                 </div>
               )}
             </div>
             <div className="col-sm-6">
               <label>Selecione seu pais</label>
               <Controller
-                name="countries"
+                name="counry"
                 control={control}
                 defaultValue=""
+                rules={{ required: true }}
                 render={({ field }) => (
                   <Select
                     {...field}
@@ -139,18 +248,23 @@ export default function ProfileEdit(props: any) {
                     value={select_counry}
                     instanceId="countries-select"
                     placeholder="Paises"
+                    className={errors.counry ? "is-invalid" : ""}
                     styles={{
                       control: (baseStyles: any, state: any) => ({
                         ...baseStyles,
                         borderRadius: "var(--bs-border-radius-xxl)!important",
                         margin: ".5rem!important",
-                        border: "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
+                        border:
+                          "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
                         boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important",
                       }),
                     }}
                   />
                 )}
               />
+              {errors.counry && (
+                <div className="invalid-feedback">Por favor escolha pais!</div>
+              )}
             </div>
             <div className="col-sm-6">
               <label className="w-100">Selecione seu estado</label>
@@ -171,6 +285,7 @@ export default function ProfileEdit(props: any) {
                       name="uf"
                       control={control}
                       defaultValue=""
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <Select
                           {...field}
@@ -183,13 +298,15 @@ export default function ProfileEdit(props: any) {
                           value={select_uf}
                           instanceId="uf-select"
                           placeholder="Estados"
+                          className={errors.uf ? "is-invalid" : ""}
                           styles={{
                             control: (baseStyles: any, state: any) => ({
                               ...baseStyles,
                               borderRadius:
                                 "var(--bs-border-radius-xxl)!important",
                               margin: ".5rem!important",
-                              border: "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
+                              border:
+                                "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
                               boxShadow:
                                 "0 .5rem 1rem rgba(0,0,0,.15)!important",
                             }),
@@ -199,6 +316,11 @@ export default function ProfileEdit(props: any) {
                     />
                   )}
                 </>
+              )}
+              {errors.uf && (
+                <div className="invalid-feedback">
+                  Por favor escolha estado!
+                </div>
               )}
             </div>
             <div className="col-sm-6">
@@ -220,6 +342,7 @@ export default function ProfileEdit(props: any) {
                       name="city"
                       control={control}
                       defaultValue=""
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <Select
                           {...field}
@@ -231,13 +354,15 @@ export default function ProfileEdit(props: any) {
                           value={select_city}
                           instanceId="city-select"
                           placeholder="Cidades"
+                          className={errors.city ? "is-invalid" : ""}
                           styles={{
                             control: (baseStyles: any, state: any) => ({
                               ...baseStyles,
                               borderRadius:
                                 "var(--bs-border-radius-xxl)!important",
                               margin: ".5rem!important",
-                              border: "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
+                              border:
+                                "var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important",
                               boxShadow:
                                 "0 .5rem 1rem rgba(0,0,0,.15)!important",
                             }),
@@ -248,28 +373,46 @@ export default function ProfileEdit(props: any) {
                   )}
                 </>
               )}
+              {errors.city && (
+                <div className="invalid-feedback">
+                  Por favor escolha cidade!
+                </div>
+              )}
             </div>
             <div className="col-sm-6">
-              <label>Data aniversário</label>
+              <label htmlFor="birthday">Data aniversário</label>
               <input
                 type="date"
-                className="form-control rounded-5 shadow px-2 pt-1 m-2 w-100 border"
-                {...register("date", {
+                id="birthday"
+                className={`form-control px-2 pt-1 m-2 border ${
+                  errors.birthday ? "is-invalid" : ""
+                } rounded-5 shadow`}
+                {...register("birthday", {
                   valueAsDate: true,
+                  required: "required",
                 })}
               />
+              {errors.birthday && (
+                <div className="invalid-feedback">
+                  Por favor ensira uma data de aniversário valida!
+                </div>
+              )}
             </div>
             <div className="col-12 d-flex text-center">
-              <button
-                className="btn btn-primary mx-auto rounded-5 shadow"
-                type="submit"
-              >
-                Criar conta
-              </button>
-              {}
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
+              {loading ? (
+                <div className="text-center">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  className="btn btn-primary mx-auto rounded-5 shadow"
+                  type="submit"
+                >
+                  Criar conta
+                </button>
+              )}
             </div>
           </form>
         </section>

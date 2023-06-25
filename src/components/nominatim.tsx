@@ -32,15 +32,31 @@ export default function Nominatim() {
   const [select_counry, set_select_counry] = useState<any>(false);
   const [select_uf, set_select_uf] = useState<any>(false);
 
-  const localisacao = useQuery(["localisacao", lat_lon], async () => {
+  const localisacao = useQuery(["localisacao"], () => {
+    const previousData_coords: any = queryClient.getQueryCache().getAll();
+
+    for (let i = 0; i < previousData_coords.length; i++) {
+      if (previousData_coords[i].queryKey[0] == "coords") {
+        if (previousData_coords[i].queryKey[1] != undefined) {
+          if (
+            previousData_coords[i].queryKey[1][0] != 0 &&
+            previousData_coords[i].queryKey[1][1] != 0
+          ) {
+            return previousData_coords[i].state.data;
+          }
+        }
+      }
+    }
+
+    return null;
+  });
+
+  const coords = useQuery(["coords", lat_lon], async () => {
     if (lat_lon[0] == 0 && lat_lon[1] == 0) {
       return null;
     }
-    const previousData: any = queryClient.getQueryData([
-      "localisacao",
-      lat_lon,
-    ]);
-    console.log("localisacao useQuery", previousData, lat_lon);
+    const previousData: any = queryClient.getQueryData(["coords", lat_lon]);
+    console.log("coords useQuery", previousData, lat_lon);
 
     if (previousData) {
       return previousData;
@@ -91,6 +107,8 @@ export default function Nominatim() {
               if (previousData_city[j].label == city) {
                 new_localisacao.city = previousData_city[j];
                 console.log("new_localisacao", new_localisacao);
+                queryClient.invalidateQueries(["localisacao"]);
+                queryClient.setQueryData(["localisacao"],new_localisacao)
                 return new_localisacao;
               }
             }
@@ -99,7 +117,7 @@ export default function Nominatim() {
         }
       }
     }
-
+    return null;
   });
 
   const uf_options = useQuery(["uf", select_counry?.ISO], async () => {
@@ -170,7 +188,7 @@ export default function Nominatim() {
 
   useEffect(() => {
     if (navigator.geolocation) {
-      console.log("localisacao", localisacao);
+      console.log("coords", coords);
       navigator.geolocation.getCurrentPosition(async (position) => {
         set_lat_lon([position.coords.latitude, position.coords.longitude]);
       });

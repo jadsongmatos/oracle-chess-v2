@@ -155,9 +155,9 @@ model Job {
 
 model User {
   id                            String             @id @default(uuid())
-  username                      String             @db.VarChar(16)
+  username                      String             @db.VarChar(255)
   email                         String             @unique @db.VarChar(255)
-  password                      String             @db.VarChar(32)
+  password                      String             @db.VarChar(255)
   birthday                      DateTime
   create_time                   DateTime           @default(now())
   update_time                   DateTime           @updatedAt
@@ -174,7 +174,7 @@ model User {
 }
 
 model location {
-  id        Int     @id
+  id        Int     @id @default(autoincrement())
   latitude  Decimal @db.Decimal
   longitude Decimal @db.Decimal
   city      Int

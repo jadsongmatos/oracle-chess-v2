@@ -9,6 +9,7 @@ import "@/styles/globals.css";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { Toaster } from 'react-hot-toast'
 
 import {
   QueryClient,
@@ -53,6 +54,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Hydrate>
       <ReactQueryDevtools initialIsOpen />
+      <Toaster/>
     </PersistQueryClientProvider>
   );
 }
