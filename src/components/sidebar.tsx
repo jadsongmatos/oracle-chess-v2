@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Navbar from "react-bootstrap/Navbar";
 
 export default function Sidebar() {
-  const [show_sidebar, set_show_sidebar] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -22,24 +23,34 @@ export default function Sidebar() {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="mx-auto">
-          <ul className="nav nav-pills mb-auto row">
-            <li className="nav-item col-sm-3">
-              <Link href="#" className="nav-link active" aria-current="page">
-                Home
+          <ul className="nav nav-pills mb-auto row text-center">
+            <li className="col-sm-4">
+              <Link
+                href="/auth/login"
+                className={`nav-link ${
+                  router.route == "/auth/login" ? "active" : ""
+                }`}
+              >
+                Login
               </Link>
             </li>
-            <li className="col-sm-3">
-              <Link href="/profile" className="nav-link">
-                Perfil
-              </Link>
-            </li>
-            <li className="col-sm-3">
-              <Link href="#" className="nav-link">
+            <li className="col-sm-4">
+              <Link
+                href="#"
+                className={`nav-link ${
+                  router.route == "/friend" ? "active" : ""
+                }`}
+              >
                 Amigos
               </Link>
             </li>
-            <li className="col-sm-3">
-              <Link href="#" className="nav-link">
+            <li className="col-sm-4">
+              <Link
+                href="#"
+                className={`nav-link ${
+                  router.route == "/store" ? "active" : ""
+                }`}
+              >
                 Loja
               </Link>
             </li>

@@ -1,17 +1,20 @@
-const JWT_SECRET_KEY = new TextEncoder().encode(process.env.JWT_SECRET_KEY ? process.env.JWT_SECRET_KEY : "")
+const SECRET_KEY = process.env.SECRET_KEY ? process.env.SECRET_KEY : ""
+const JWT_SECRET_KEY = new TextEncoder().encode(process.env.SECRET_KEY ? process.env.SECRET_KEY : "")
 
 import { jwtVerify, SignJWT } from "jose";
+import bcrypt from "bcrypt";
 
-export class AuthError extends Error { }
+export const verify_hash = (plainPassword: string, hashedPassword: string) => {
+  return bcrypt.compareSync(SECRET_KEY + plainPassword, hashedPassword)
+};
 
-interface UserJwtPayload {
-  jti: string;
-  iat: number;
-}
+export const create_hash = (plainPassword: string) => {
+  return bcrypt.hashSync(plainPassword, SECRET_KEY)
+};
 
-export async function verifyAuth(token: string) {
+export async function verify_auth(token: string) {
   if (!token) {
-    throw new AuthError("Missing user token");
+    throw new Error("Missing user token");
   }
 
   try {
@@ -19,10 +22,10 @@ export async function verifyAuth(token: string) {
       token,
       JWT_SECRET_KEY
     );
-    return verified.payload as UserJwtPayload;
+    return verified.payload;
   } catch (err) {
     console.log("AuthError----", err);
-    throw new AuthError("Your token has expired.");
+    throw new Error("Your token has expired");
   }
 }
 

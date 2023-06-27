@@ -134,7 +134,7 @@ export default function ProfileEdit(props: any) {
       body.longitude = tmp.longitude;
     }
     try {
-      const res = await axios.post("/api/profile", body);
+      const res = await axios.post("/api/auth/register", body);
       console.log(res);
       router.push("/");
     } catch (error: any) {
@@ -422,7 +422,7 @@ export default function ProfileEdit(props: any) {
 }
 
 export async function getStaticProps(context: any) {
-  const countries_json = require("../../public/countries.json");
+  const countries_json = require("../../../public/countries.json");
   let countries: Array<any> = countries_json.map((e: any) => {
     return { value: Number(e["ISO-Numeric"]), label: e.Country, ISO: e.ISO };
   });

@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from 'cookies-next';
 import prisma from "@/services/db"
-import { createJWT } from "@/services/auth"
-import bcrypt from "bcrypt";
+import { createJWT, create_hash } from "@/services/auth"
 
 async function handler(
   req: NextApiRequest,
@@ -10,24 +9,19 @@ async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      const password = await bcrypt.hash(req.body.password, 1808);
+      const password = await create_hash(req.body.password)
       const new_user = await prisma.user.create({
         data: {
           username: req.body.username,
           email: req.body.email,
           birthday: req.body.birthday,
-          password: password
+          password: password,
         }
       })
       const jwt = await createJWT({
         id: new_user.id,
         username: req.body.username,
         email: req.body.email,
-        latitude: req.body.latitude,
-        longitude: req.body.longitude,
-        city: req.body.city,
-        state: req.body.state,
-        nation: req.body.nation,
       })
 
       setCookie('jwt', jwt, { req, res });
