@@ -144,7 +144,7 @@ model Tree {
 }
 
 model Job {
-  id      String @id
+  id      String @id @default(uuid())
   data    String
   status  String
   user_id String
@@ -181,9 +181,9 @@ model location {
   state     Int
   nation    String  @db.Char(2)
   user_id   String
-  user      User    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_location_user1")
+  user      User    @relation(fields: [user_id], references: [id])
 
-  @@index([user_id], map: "fk_location_user1_idx")
+  @@index([user_id])
 }
 
 model friend {

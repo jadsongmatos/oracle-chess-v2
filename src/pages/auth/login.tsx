@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Form, Button } from "react-bootstrap";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import Layout from "@/components/layout";
 
@@ -49,9 +48,9 @@ export default function Register() {
       <div className="container align-items-center mt-5">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="row g-3 needs-validation"
+          className="needs-validation "
         >
-          <div className="col-12">
+          <div className="col-sm-6 mx-auto">
             <label className="form-label" htmlFor="email">
               Email
             </label>
@@ -75,7 +74,7 @@ export default function Register() {
               </div>
             )}
           </div>
-          <div className="col-12">
+          <div className="col-sm-6 mx-auto mt-3">
             <label htmlFor="password">password</label>
             <input
               id="password"

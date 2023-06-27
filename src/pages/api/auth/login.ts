@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from 'cookies-next';
 import prisma from "@/services/db"
-import { createJWT, verify_hash } from "@/services/auth"
+import { verify_hash } from "@/services/auth"
+import { createJWT } from "@/services/jwt"
 
 const refresh = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   if (req.method === "POST") {
@@ -19,7 +20,7 @@ const refresh = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
       if (user) {
         if (await verify_hash(
-          req.body.password,
+          req.body.email+req.body.password,
           user.password
         )) {
           const jwt = await createJWT({

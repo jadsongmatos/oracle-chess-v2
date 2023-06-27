@@ -1,4 +1,3 @@
-import { getCsrfToken } from "next-auth/react";
 import axios from "axios";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -19,12 +18,4 @@ export default function Recover({ csrfToken }: any) {
         console.log(err);
       });
   }, []);
-}
-
-export async function getServerSideProps(context: any) {
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  };
 }

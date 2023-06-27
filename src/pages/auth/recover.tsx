@@ -57,7 +57,7 @@ export default function Recover({ csrfToken }: any) {
   ///api/auth/callback/credential?test=1808
 
   return (
-    <Layout dark={true}>
+    <Layout>
       <Form onSubmit={handleSubmit(onSubmit, onError)}>
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Label>Email</Form.Label>

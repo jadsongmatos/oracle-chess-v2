@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import prisma from "../../services/db"
+import prisma from "@/services/db"
 
 export type Root = Root2[]
 

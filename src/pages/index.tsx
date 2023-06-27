@@ -1,8 +1,13 @@
 import Head from "next/head";
-//import Image from 'next/image'
+import { useRouter } from "next/router";
+
 import dynamic from "next/dynamic";
 
 import { useEffect, useState, useRef } from "react";
+
+import axios from "axios";
+import toast from "react-hot-toast";
+import { getCookie } from "cookies-next";
 
 const Chessground: any = dynamic(() => import("react-chessground" as any), {
   ssr: false,
@@ -30,6 +35,8 @@ export default function Home() {
   const [msg_worker, set_msg_worker] = useState<any>();
   const [moves, set_moves] = useState(0);
   const [start_time, set_start_time] = useState(performance.now());
+  const jwt_cookie = getCookie("jwt");
+  const router = useRouter();
 
   const workers_ref: any = useRef([]);
 
@@ -57,7 +64,31 @@ export default function Home() {
       set_moves(moves + msg_worker.data.new_moves);
     } else if (msg_worker?.data?.type == "then") {
       console.log("msg_worker", msg_worker, jobs);
-      set_jobs(jobs.filter((job) => job.id !== msg_worker.data.id));
+
+      let id_job = -1;
+      for (let i = 0; i < jobs.length; i++) {
+        if (jobs[i].id == msg_worker.data.id) {
+          id_job = i;
+          break;
+        }
+      }
+
+      axios
+        .post("/api/p/job", {
+          values: msg_worker.data.data,
+          moves: jobs[id_job],
+        })
+        .then((res) => {
+          console.log("job", res);
+        })
+        .catch((err) => {
+          console.log("catch get tree", err);
+        });
+
+      const new_jobs = jobs;
+      new_jobs.splice(id_job, 1);
+
+      set_jobs(new_jobs);
     }
     set_msg_worker(null);
   }, [msg_worker, chess_grounds, jobs, moves]);
@@ -77,19 +108,18 @@ export default function Home() {
     try {
       let new_job: Array<Move> = [];
       for (let i = 0; i < number; i++) {
-        const response = await fetch("/api/tree", {
-          method: "GET",
-          redirect: "follow",
-        });
-        new_job = await response.json();
+        const res = await axios.get("/api/p/tree");
+        new_job = res.data;
         new_job.sort((a, b) => a.id - b.id);
         console.log("new_job", new_job);
 
         new_id++;
         new_jobs.push({ moves: new_job, id: new_id });
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      console.log("catch get tree", err.response.data);
+      toast.error(err.response.data.message);
+      return false;
     }
 
     set_job_id(new_id);
@@ -238,8 +268,12 @@ export default function Home() {
                 type="button"
                 className="btn btn-outline-primary"
                 onClick={() => {
-                  const n_idle_threads = n_threads - jobs.length;
-                  add_job(n_idle_threads, !start);
+                  if (jwt_cookie) {
+                    const n_idle_threads = n_threads - jobs.length;
+                    add_job(n_idle_threads, !start);
+                  } else {
+                    router.push("/auth/login");
+                  }
                 }}
               >
                 Iniciar
