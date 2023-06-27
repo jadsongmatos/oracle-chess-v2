@@ -145,7 +145,7 @@ model Tree {
 
 model Job {
   id      String @id @default(uuid())
-  data    String
+  data    Bytes
   status  String
   user_id String
   user    User   @relation(fields: [user_id], references: [id])

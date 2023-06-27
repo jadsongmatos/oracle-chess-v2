@@ -12,7 +12,8 @@ export async function middleware(request: NextRequest) {
     const cookie = await request.cookies.get("jwt");
     if (cookie) {
       const verifiedToken = await verify_auth(cookie.value);
-      console.log("middleware+++", verifiedToken);
+      //console.log("middleware+++", verifiedToken);
+      return NextResponse.next();
     } else {
       return new NextResponse(
         JSON.stringify({ success: false, message: "authentication failed" }),
@@ -20,7 +21,7 @@ export async function middleware(request: NextRequest) {
       );
     }
 
-    return NextResponse.next();
+    
   } catch (error) {
     console.error(error);
     console.log("middleware---");

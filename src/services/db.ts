@@ -7,12 +7,12 @@ declare global {
 const client =
   globalThis.prisma ||
   new PrismaClient({
-    log: [
+    /*log: [
       {
         emit: "stdout",
         level: "error",
       },
-    ],
+    ],*/
   });
 
 /*client.$on("beforeExit", (e: any) => {

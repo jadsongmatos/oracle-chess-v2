@@ -77,6 +77,7 @@ export default function Home() {
         .post("/api/p/job", {
           values: msg_worker.data.data,
           moves: jobs[id_job],
+          user_id: "e29e3a93-5884-46bb-b5cb-42765f7950d3"
         })
         .then((res) => {
           console.log("job", res);
