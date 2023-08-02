@@ -1,38 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Oracle Chess
 
-## Getting Started
+Bem-vindo ao meu projeto de xadrez, uma plataforma gamificada colaborativa projetada para mapear todas as jogadas de xadrez possíveis envolvendo jogadores de todo o mundo. Este é o projeto culminante do meu curso de banco de dados, construído com a paixão de combinar gamificação com a resolução de problemas complexos de forma amigável, escalável e envolvente.
 
-First, run the development server:
+## Tecnologias utilizadas
+- PostgreSQL para gerenciamento robusto de banco de dados
+- HTML, CSS e JavaScript para UI/UX responsivo e intuitivo
+- Node.js para o back-end poderoso e escalável
+- Next.js para uma experiência de front-end perfeita e roteamento fácil
+
+Este é um projeto [Next.js](https://nextjs.org/) inicializado com [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages /criar-próximo-aplicativo).
+
+## Começando
+
+Em primeiro lugar, clone este repositório em sua máquina local. Em seguida, navegue até o diretório do projeto e execute o servidor de desenvolvimento usando um dos seguintes comandos:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
+# ou
+desenvolvedor de fios
+# ou
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Depois que o servidor iniciar, abra seu navegador e navegue até [http://localhost:3000](http://localhost:3000) para ver o resultado.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Sinta-se à vontade para começar a explorar e editar as páginas. Comece com `pages/index.tsx`. A mágica do hot-reloading significa que a página é atualizada automaticamente conforme você edita o arquivo.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Os endpoints da API para este projeto podem ser acessados em [http://localhost:3000/api/hello](http://localhost:3000/api/hello). Você pode editar este endpoint em `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Observe que o diretório `pages/api` é mapeado para `/api/*`. Os arquivos neste diretório são tratados como [rotas de API](https://nextjs.org/docs/api-routes/introduction) em vez de páginas React.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Este projeto utiliza [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) para otimizar e carregar automaticamente o Inter, uma fonte personalizada do Google.
 
-## Learn More
+## Saber mais
 
-To learn more about Next.js, take a look at the following resources:
+Expanda seu conhecimento sobre Next.js com os seguintes recursos:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Documentação do Next.js](https://nextjs.org/docs) - Informações detalhadas sobre os recursos e a API do Next.js.
+- [Learn Next.js](https://nextjs.org/learn) - Um tutorial interativo do Next.js.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Não hesite em conferir [o repositório GitHub Next.js](https://github.com/vercel/next.js/). Seus comentários e contribuições são muito apreciados!
 
-## Deploy on Vercel
+## Implantação
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Implante seu aplicativo Next.js sem esforço com a [Plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme), projetado pelos criadores do Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Para obter mais detalhes, consulte a [documentação de implantação do Next.js](https://nextjs.org/docs/deployment).
+
+## Contribuindo
+
+Sinta-se à vontade para bifurcar este projeto, criar uma ramificação de recursos e enviar uma solicitação pull. Suas contribuições são sempre bem vindas!
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para obter mais informações.
